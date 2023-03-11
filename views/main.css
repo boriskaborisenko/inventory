@@ -1,0 +1,68 @@
+html, body{
+    margin:0;
+    padding:0;
+    font-family: 'Arsenal';
+    font-weight: 400;
+}
+
+.page{
+    width:80%;
+    margin:50px auto;
+    max-width: 1000px;
+}
+
+#res{
+    margin-top: 20px;
+}
+.red{
+    color:rgb(206, 26, 35);
+}
+
+.green{
+    color:olivedrab;
+}
+
+
+.row{
+    display:block;
+    background:#fafbfc;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding:6px 10px;
+    border-bottom:1px solid #eee;
+}
+.el{
+    display: inline-block;
+    vertical-align: top;
+    width:49%;
+}
+.inv{
+    font-weight: 700;
+}
+
+.date{
+    text-align: right;
+    font-weight: 700;
+    font-size: 12px;
+}
+.desc{
+    font-style:italic;
+    color:#000000;
+    
+}
+
+input{
+    font-family: 'Arsenal';
+    font-weight: 700;
+    padding:5px 10px;
+    border: none;
+    border-radius: 0px;
+    border-bottom:1px solid gray;
+    
+}
+
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
+    border-color: rgba(88, 86, 85, 0.8);
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.0) inset, 0 0 8px rgba(201, 251, 254, 0.0);
+    outline: 0 none;
+}
