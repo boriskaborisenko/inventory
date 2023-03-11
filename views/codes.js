@@ -18,8 +18,8 @@ const pasteData = (d) => {
     if(d.id !== undefined){
         inv.innerHTML = d.id
         details.innerHTML = d.inv.comm
-        person.innerHTML = 'Відповідальний: '+d.inv.fio
-        last.innerHTML = (d.harp) ? 'Last inventory:<br>'+d.harp : 'Last inventory:<br>— '
+        person.innerHTML = 'МВО: '+d.inv.fio
+        last.innerHTML = (d.harp) ? 'Остання інвентаризація:<br><span>'+d.harp+'</span>' : 'Остання інвентаризація:<br>— '
         load.style.display = 'none'
         err.style.display = 'none'
     }else{
@@ -56,7 +56,7 @@ mark.addEventListener('click', async () => {
         btn.style.display = 'none'
         last.style.display = 'none'
         info.style.display = 'block'
-        setTimeout(()=>{location.href = 'https://nema.takogo.net'  },4000)
+        setTimeout(()=>{location.href = 'https://page.was.deleted'  },4000)
         
     })
 

@@ -69,6 +69,9 @@ app.get('/', (req,res) => {
 })
 
 
+
+///// mobile inventory logic start ////////
+
 app.get('/code/:inv', async (req, res) => {
     res.sendFile(path.join(__dirname, 'views/code.html'));
 })
@@ -152,7 +155,13 @@ app.get('/mark/:inv', async (req, res) => {
 
 })
 
+/////////////// mobile invettory logic end //////////////
 
-app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
+
+
+
+
+
+app.listen(port, () => console.log(`Server listening on port ${port}!`));
 
 
