@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../views/sticker.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="all">
+        
+        <!-- <div class="one">
+            <div class="l">
+                <div class="num">101480013</div>
+                <div>
+                    <img  src="../views/brc.png" alt="">
+                </div>
+                <div class="anno">ПЛИТА ЕЛЕКТРИЧНА ПЕ-4ш Н Арм-Еко ПЕ4 </div>
+            </div>
+            <div class="r">
+                <img src="../views/test.png" alt="">
+            </div>
+            
+        </div> -->
+        
+       
+    </div>
+
+
+<script>
+
+
+    const all = document.querySelector('.all')
+    const template = `<div class="one">
+            <div class="l">
+                <div class="num">101480013</div>
+                <div>
+                    <img  src="../views/brc.png" alt="">
+                </div>
+                <div class="anno">ПЛИТА ЕЛЕКТРИЧНА ПЕ-4ш Н Арм-Еко ПЕ4 </div>
+            </div>
+            <div class="r">
+                <img src="../views/test.png" alt="">
+            </div>
+            
+        </div>`
+
+    for(let i=0; i<27; i++){
+       all.innerHTML += template
+    }    
+
+</script>
+
+</body>
+</html>

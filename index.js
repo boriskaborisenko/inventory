@@ -56,8 +56,18 @@ const port = process.env.PORT;
 
 
 app.use(cors());
-app.use('/views',express.static(__dirname + '/views'));
+
+
+/* const routes = ['home', 'code', 'sticker']
+routes.map(r=>{
+    console.log(r)
+    app.use('/'+r, express.static(__dirname + '/views'));
+}) */
+
+/* app.use('/views',express.static(__dirname + '/views'));
 app.use('/code',express.static(__dirname + '/views'));
+app.use('/sticker',express.static(__dirname + '/views'));  */
+app.use('/views', express.static(path.join(__dirname, '/views')))
 
 // Configuring body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -122,7 +132,6 @@ app.get('/getcodedata/:inv', async (req, res) => {
         res.json({
             id:id,
             data:selected,
-            serv: process.env.SERVERX,
             harp: lastDate
         })
     })
@@ -158,7 +167,9 @@ app.get('/mark/:inv', async (req, res) => {
 /////////////// mobile invettory logic end //////////////
 
 
-
+app.get('/sticker',  (req,res) => {
+    res.sendFile(path.join(__dirname, 'views/sticker.html'));
+})
 
 
 

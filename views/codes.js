@@ -36,7 +36,6 @@ fetch("/getcodedata/"+codeData.code).then(response=>response.json())
 .then(data=>{
     codeData.inv = data.data
     codeData.id = data.id
-    codeData.server = data.serv
     codeData.harp = data.harp
     console.log(codeData)
     pasteData(codeData)
