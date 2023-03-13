@@ -1,11 +1,14 @@
 const dotenv = require('dotenv').config()
-const CryptoJS = require("crypto-js");
+const QRCode = require("qrcode-svg");
+const barcode = require('barcode-2-svg');
+const CryptoJS = require("crypto-js")
+const fs = require('fs')
 const axios = require('axios')
 const moment = require('moment')
 const express = require('express')
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const path = require('path');
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const path = require('path')
 const sql = require('mssql')
 const sqlConfig = {
     user:process.env.DBUSER,
@@ -16,6 +19,29 @@ const sqlConfig = {
         trustServerCertificate: true,
     }
 }
+
+
+const makeQR = (url,output) => {
+    const qrcode = new QRCode({
+        content: url,
+        padding: 4,
+        width: 256,
+        height: 256,
+        color: "#000000",
+        background: "#ffffff",
+        ecl: "M"
+      });
+      fs.writeFileSync('views/qr/'+output+'.svg', qrcode.svg());
+}
+
+const makeBarcode = (nums, output) => {
+    const code128 = barcode(nums, "code128", {width:80, barWidth:1, barHeight:25, toFile:true, path: 'views/barcodes/'+output, output:'svg'})
+}
+
+ /*  qrcode.save("sample.svg", function(error) {
+    if (error) throw error;
+    console.log("Done!");
+  }); */
 
 /* const ciphertext = CryptoJS.AES.encrypt('101480013', process.env.AESSECRET).toString();
 
@@ -58,11 +84,7 @@ const port = process.env.PORT;
 app.use(cors());
 
 
-/* const routes = ['home', 'code', 'sticker']
-routes.map(r=>{
-    console.log(r)
-    app.use('/'+r, express.static(__dirname + '/views'));
-}) */
+
 
 /* app.use('/views',express.static(__dirname + '/views'));
 app.use('/code',express.static(__dirname + '/views'));
@@ -88,8 +110,10 @@ app.get('/code/:inv', async (req, res) => {
 
 
 app.get('/getcodedata/:inv', async (req, res) => {
-    const bytes  = CryptoJS.AES.decrypt(req.params.inv, process.env.AESSECRET);
+    const addSlash = req.params.inv.replace(/xAzX/g,"/")
+    const bytes  = CryptoJS.AES.decrypt(addSlash, process.env.AESSECRET);
     const originalText = bytes.toString(CryptoJS.enc.Utf8);
+    
     
     const id = Number(originalText)
     console.log(id)
@@ -106,9 +130,9 @@ app.get('/getcodedata/:inv', async (req, res) => {
     
     const selected = {
         fio:all.recordset[0].FIO_OTV,
-        comm: all.recordset[0].COMM
+        comm: all.recordset[0].NOS
     }
-    selected.comm = selected.comm.join(' ')
+    //selected.comm = selected.comm.join(' ')
 
 
     const searchInHarp = JSON.stringify({
@@ -169,6 +193,42 @@ app.get('/mark/:inv', async (req, res) => {
 
 app.get('/sticker',  (req,res) => {
     res.sendFile(path.join(__dirname, 'views/sticker.html'));
+})
+
+app.get('/stickerdata/:imgs', async (req, res) => {
+    await sql.connect(sqlConfig)
+   const  all = await sql.query `select * from osk `
+    console.log(all.recordset.length)
+    
+    const lowdata = []
+    all.recordset.map((a, index) => {
+
+        const id = a.INVNUMBER.trim()
+        const preUrl = CryptoJS.AES.encrypt(id, process.env.AESSECRET).toString()
+        const killSlash = preUrl.replace(/\//g,"xAzX")
+
+        const url = process.env.BASEURL+'/code/'+killSlash
+        console.log(id, a.NOS, url)
+
+        if(req.params.imgs == 'with'){
+             makeQR(url,index)
+             makeBarcode(id,index)
+        }
+
+       
+       lowdata.push({
+            inv:Number(id), 
+            name: a.NOS, 
+            url:url,
+            qr: index+'.svg',
+            bar:index+'.svg'
+        })
+        
+
+
+    })
+   
+    res.json({data:lowdata})
 })
 
 
