@@ -18,7 +18,7 @@ const template = (sticker) => {
 
         return `<div class="one">
             <div class="l">
-                <div class="anno">${trun(sticker.name, 60)}</div>   
+                <div class="anno">${trun(sticker.name, 52).toUpperCase()}</div>   
                 <div class="x"><img src="../views/barcodes/${sticker.bar}"></div>
                 <div class="stid">${sticker.inv}</div>
             </div>
@@ -63,10 +63,10 @@ const stickers = []
     
     console.log(stickers)
 
-    pages(stickers.length, 44, stickers)
+    pages(stickers.length, 176, stickers)
     
     stickers.map((s,i) => {
-        if(i<50){
+        if(i<176){
             all.innerHTML+=template(s)
            
         }
