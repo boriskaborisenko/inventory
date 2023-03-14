@@ -20,6 +20,18 @@ const sqlConfig = {
     }
 }
 
+const harpData = (data) => {
+    return {
+    method: 'post',
+    url: process.env.HARPERURL,
+    headers: { 
+      'Content-Type': 'application/json', 
+      'Authorization': process.env.HARPERTOKEN
+    },
+    data : data
+  }
+}
+
 
 const makeQR = (url,output) => {
     const qrcode = new QRCode({
@@ -38,65 +50,25 @@ const makeBarcode = (nums, output) => {
     const code128 = barcode(nums, "code128", {width:80, barWidth:1, barHeight:25, toFile:true, path: 'views/barcodes/'+output, output:'svg'})
 }
 
- /*  qrcode.save("sample.svg", function(error) {
-    if (error) throw error;
-    console.log("Done!");
-  }); */
-
-/* const ciphertext = CryptoJS.AES.encrypt('101480013', process.env.AESSECRET).toString();
-
-
-const bytes  = CryptoJS.AES.decrypt(ciphertext, process.env.AESSECRET);
-const originalText = bytes.toString(CryptoJS.enc.Utf8);
- */
-
-const harpData = (data) => {
-    return {
-    method: 'post',
-    url: process.env.HARPERURL,
-    headers: { 
-      'Content-Type': 'application/json', 
-      'Authorization': process.env.HARPERTOKEN
-    },
-    data : data
-  }
-}
 
 
 /* 
-let all 
-const main = async () => {
-    await sql.connect(sqlConfig)
-    //all = await sql.query`select date_d, INVNUMBER, NOS from osk`
-    all = await sql.query `select * from osk `
-    console.log(all.recordset, all.recordset.length)
-} */
-//main()
-//console.log(process.env)
-
+const ciphertext = CryptoJS.AES.encrypt('101480013', process.env.AESSECRET).toString();
+const bytes  = CryptoJS.AES.decrypt(ciphertext, process.env.AESSECRET);
+const originalText = bytes.toString(CryptoJS.enc.Utf8);
+ */
 
 
 ///SERVER
 const app = express();
 const port = process.env.PORT;
-
-
 app.use(cors());
-
-
-
-
-/* app.use('/views',express.static(__dirname + '/views'));
-app.use('/code',express.static(__dirname + '/views'));
-app.use('/sticker',express.static(__dirname + '/views'));  */
 app.use('/views', express.static(path.join(__dirname, '/views')))
-
-// Configuring body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
 app.get('/', (req,res) => {
-    //console.log(all.recordset.length)
     res.sendFile(path.join(__dirname, 'views/home.html'));
 })
 
@@ -191,6 +163,8 @@ app.get('/mark/:inv', async (req, res) => {
 /////////////// mobile invettory logic end //////////////
 
 
+
+////// stickers strat ////////////
 app.get('/sticker',  (req,res) => {
     res.sendFile(path.join(__dirname, 'views/sticker.html'));
 })
@@ -230,7 +204,7 @@ app.get('/stickerdata/:imgs', async (req, res) => {
    
     res.json({data:lowdata})
 })
-
+////////sticker end ///////////////
 
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));

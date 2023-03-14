@@ -1,6 +1,17 @@
 const code = window.location.href.split('/code/')[1]
 const codeData = {code, harp:false}
 
+const successCallback = (position) => {
+    console.log(position.coords);
+    alert(position.coords.latitude)
+  };
+  
+  const errorCallback = (error) => {
+    console.log(error);
+  };
+  
+  navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
 //http://localhost:3000/code/U2FsdGVkX1++5XVEDS2k2P1a7RoXNgJkR+TvVnAzTno=
 
 const main = document.querySelector('#main')
