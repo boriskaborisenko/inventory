@@ -40,12 +40,9 @@ const trun = (str, length) => {
       }
 
 
-const pages = (total, divider, data) => {
-    const pages = Math.ceil(total/divider)
- console.log(total, divider, pages)
-        
-        
-}
+
+
+
 
 
 const stickers = []
@@ -61,17 +58,46 @@ const stickers = []
         stickers.push(sticker)
     })
     
-    console.log(stickers)
-
-    pages(stickers.length, 176, stickers)
     
-    stickers.map((s,i) => {
-        if(i<176){
-            all.innerHTML+=template(s)
-           
+
+    const ps = []
+  
+ 
+    let str = ''
+    stickers.map((s, i) => {
+        str += template(s)
+            
+        if((i+1) % 44 == 0 || (i+1) == stickers.length){
+            ps.push(str)
+            str = ''
         }
+        
     }) 
 
+
+ 
+    
+
+    html2pdf().set(opt('testfile')).from(all).toPdf().get('pdf').then( (pdf) => {
+       
+            all.innerHTML = 'somedata'
+            
+                pdf.addPage();
+            
+            
+        
+      }).toContainer().toCanvas().toPdf().save(); 
+    
+    //all.innerHTML = ps[30]
+
+   
     //html2pdf().set(opt('testfile')).from(all).save();
+
+    
+            //all.innerHTML+=template(s)
+           /*  html2pdf().set(opt('testfile')).from(all).toPdf().get('pdf').then( (pdf) => {
+                all.innerHTML = '';
+                pdf.addPage();
+              }).toContainer().toCanvas().toPdf().save();  */
 
 })
