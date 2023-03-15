@@ -5,9 +5,9 @@ const all = document.querySelector('.all')
 
 const opt = (filename) => {
     return{
-    margin:       1,
+    margin:       2,
     filename:     filename+'.pdf',
-    image:        { type: 'jpeg', quality: 0.98 },
+    image:        { type: 'jpeg', quality: 0.99 },
     html2canvas:  { scale: 2 },
     jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
     }
@@ -31,7 +31,7 @@ const template = (sticker) => {
 
   
 
-
+const ps = []
 
 const trun = (str, length) => {
         return str.length > length
@@ -45,10 +45,16 @@ const trun = (str, length) => {
 
 
 
+
+
 const stickers = []
- fetch("/stickerdata/"+p).then(response=>response.json())
-.then(data=>{
-    data.data.map(d=>{
+
+const mypdf = async  () => {
+
+    const data = await fetch("/stickerdata/"+p)
+    const json = await data.json()
+    
+     json.data.map(d=>{
         const sticker = {
             inv:d.inv,
             name:d.name,
@@ -57,47 +63,52 @@ const stickers = []
         }
         stickers.push(sticker)
     })
-    
-    
-
-    const ps = []
-  
- 
-    let str = ''
-    stickers.map((s, i) => {
-        str += template(s)
-            
-        if((i+1) % 44 == 0 || (i+1) == stickers.length){
-            ps.push(str)
-            str = ''
-        }
         
-    }) 
+        
 
-
- 
-    
-
-    html2pdf().set(opt('testfile')).from(all).toPdf().get('pdf').then( (pdf) => {
        
-            all.innerHTML = 'somedata'
+    
+    
+        let str = ''
+        stickers.map((s, i) => {
+            str += template(s)
+                
+            if((i+1) % 44 == 0 || (i+1) == stickers.length){
+                ps.push(str)
+                str = ''
+            }
             
-                pdf.addPage();
-            
-            
+        }) 
+
         
-      }).toContainer().toCanvas().toPdf().save(); 
-    
-    //all.innerHTML = ps[30]
+        
+        
 
-   
-    //html2pdf().set(opt('testfile')).from(all).save();
+const loop = async () => {
+    for (let i=0; i < ps.length; i++){
+            console.log(i)
+            all.innerHTML += ps[i]
+            await html2pdf().set(opt('filename_'+(i+1))).from(all).save()
+            all.innerHTML = ''    
+           
+           
+    }
+}
 
-    
-            //all.innerHTML+=template(s)
-           /*  html2pdf().set(opt('testfile')).from(all).toPdf().get('pdf').then( (pdf) => {
-                all.innerHTML = '';
-                pdf.addPage();
-              }).toContainer().toCanvas().toPdf().save();  */
+loop()     
 
-})
+
+       
+
+}
+
+
+
+mypdf()
+
+
+
+ 
+ 
+
+
