@@ -10,7 +10,7 @@ const successCallback = (position) => {
     console.log(error);
   };
   
-  navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+  //navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
 //http://localhost:3000/code/U2FsdGVkX1++5XVEDS2k2P1a7RoXNgJkR+TvVnAzTno=
 

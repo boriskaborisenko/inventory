@@ -171,8 +171,8 @@ app.get('/sticker',  (req,res) => {
 
 app.get('/stickerdata/:imgs', async (req, res) => {
     await sql.connect(sqlConfig)
-   //const  all = await sql.query `select * from osk where invnumber not like '%1116%'`
-   const  all = await sql.query `select * from osk`
+   const  all = await sql.query `select * from osk where invnumber not like '%1116%'`
+   //const  all = await sql.query `select * from osk`
     console.log(all.recordset.length)
     
     const lowdata = []
@@ -206,6 +206,47 @@ app.get('/stickerdata/:imgs', async (req, res) => {
     res.json({data:lowdata})
 })
 ////////sticker end ///////////////
+
+app.get('/makestickers', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/makestickers.html'));
+})
+
+app.post('/dataset', async (req, res) => {
+    
+    const queryIds = `select * from osk o join kdk k on o.n_kdk = k.n_kdk where o.invnumber in (${req.body.join(', ')})`
+    await sql.connect(sqlConfig)
+    const all = await sql.query(queryIds)
+    
+    const lowdata = []
+    all.recordset.map((a) => {
+
+        const id = a.INVNUMBER.trim()
+        const preUrl = CryptoJS.AES.encrypt(id, process.env.AESSECRET).toString()
+        const killSlash = preUrl.replace(/\//g,"xAzX")
+
+        const url = process.env.BASEURL+'/code/'+killSlash
+        console.log(id, a.NOS, url)
+
+        makeQR(url,id)
+        makeBarcode(id,id)
+        
+
+       
+       lowdata.push({
+            inv:Number(id), 
+            name: a.NOS, 
+            url:url,
+            qr: id+'.svg',
+            bar:id+'.svg'
+        })
+        
+
+
+    })
+
+
+    res.json({data:lowdata})
+})
 
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));

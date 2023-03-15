@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text&family=Poppins:wght@600&family=Roboto+Condensed&display=swap');
+
+html, body{
+    margin:0;
+    padding:0;
+    font-family: 'Golos Text';
+    overflow-y: hidden;
+    background:#fff;
+}
+
+.top{
+    width:210mm;
+    margin:40px auto;
+    border-bottom:1px solid rgba(0,0,0,0.23);
+    padding-bottom:50px;
+}
+
+.pdf{
+    padding:1.5mm 0 0 2mm ;
+    width:210mm;
+    min-height: 297mm;
+    box-sizing: border-box;
+    margin:0 auto;
+    background:#fff;
+    overflow-y: hidden;
+}
+
+
+.one{
+    width:48mm;
+    height: 24mm;
+    border:1px dotted #eee;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 3mm;
+    margin-right: 3mm;
+    font-size: 0;
+    display:inline-block;
+    vertical-align:top;
+    margin-bottom:2.8mm;
+    position:relative;
+}
+
+.l{
+    width:100%;
+   margin-right: 0.5mm;
+    font-size: 12pt;
+    display:inline-block;
+    vertical-align:top;
+    position:relative;
+    z-index:5;
+   
+
+}
+
+.r{
+    position:absolute;
+    width:15mm;
+    bottom:4px;
+    right:2px;
+    z-index:2;
+}
+
+ 
+img{
+    width:100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.num{
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.anno{
+    font-size: 6pt;
+    height:20px;
+}
+
+.svgx{
+   
+}
+
+.x{
+    width:70%;
+  margin-top:2px;
+}
+
+.stid{
+    text-align:left;
+    font-size:8pt;
+    font-family:'Poppins';
+}
+
+.xx{
+    width:210mm;
+    min-height: 297mm;
+    margin:0 auto;
+    background:#fff;
+    overflow-y: hidden;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.myarea{
+    width:100%;
+    resize: none;
+}
