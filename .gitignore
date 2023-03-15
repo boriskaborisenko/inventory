@@ -1,5 +1,6 @@
 views/barcodes
 views/qr
+*.pdf
 
 # Logs
 logs
