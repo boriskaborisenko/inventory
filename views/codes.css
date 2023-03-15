@@ -67,7 +67,7 @@ html, body{
     display: inline-block;
     border-radius: 10px;
     border:none;
-    background:#8ac926;
+    background:#2369F6;
     color:#fff;
     font-weight: 700;
     padding:20px 0;
@@ -94,7 +94,7 @@ html, body{
 .info{
     text-align: center;
     font-weight: 700;
-    color:#06d6a0;
+    color:#2369F6;
     font-size: 1rem;
     margin-top:70px;
     margin-bottom:70px;
