@@ -171,7 +171,8 @@ app.get('/sticker',  (req,res) => {
 
 app.get('/stickerdata/:imgs', async (req, res) => {
     await sql.connect(sqlConfig)
-   const  all = await sql.query `select * from osk where invnumber not like '%1116%'`
+   //const  all = await sql.query `select * from osk where invnumber not like '%1116%'`
+   const  all = await sql.query `select * from osk`
     console.log(all.recordset.length)
     
     const lowdata = []

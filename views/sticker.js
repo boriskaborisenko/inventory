@@ -5,7 +5,7 @@ const all = document.querySelector('.all')
 
 const opt = (filename) => {
     return{
-    margin:       2,
+    margin:       0,
     filename:     filename+'.pdf',
     image:        { type: 'jpeg', quality: 0.99 },
     html2canvas:  { scale: 2 },
@@ -29,7 +29,7 @@ const template = (sticker) => {
         </div>`
 }
 
-  
+document.getElementById('b').scrolling = 'no';
 
 const ps = []
 
@@ -50,10 +50,13 @@ const trun = (str, length) => {
 const stickers = []
 
 const mypdf = async  () => {
-
+all.innerHTML = `<div class="center_text">
+Wait while we get data<br>
+<img style="width:200px;" src="https://thumbs.gfycat.com/HugeDeliciousArchaeocete-max-1mb.gif">
+</div>`
     const data = await fetch("/stickerdata/"+p)
     const json = await data.json()
-    
+
      json.data.map(d=>{
         const sticker = {
             inv:d.inv,
@@ -85,14 +88,16 @@ const mypdf = async  () => {
         
 
 const loop = async () => {
-    for (let i=0; i < ps.length; i++){
-            console.log(i)
+    
+    all.innerHTML = ''    
+    //alert('Data ready. Wait while pdfs generated')
+    for (let i=0; i < ps.length; i++){ //ps.length
+       console.log(i)
             all.innerHTML += ps[i]
             await html2pdf().set(opt('filename_'+(i+1))).from(all).save()
-            all.innerHTML = ''    
-           
-           
+            all.innerHTML = ''  
     }
+    all.innerHTML = '<div class="center_text"><div>Check «Downloads» folder for PDF files</div></div>'
 }
 
 loop()     
