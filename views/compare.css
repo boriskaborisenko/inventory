@@ -145,9 +145,10 @@ ul li{
 .flexpages{
     width:80%;
     display:flex;
-    align-items: center;
-  justify-content: space-around;
+    align-items: flex-start;
+    align-content: flex-start;
   flex-flow: row wrap;
+  gap: 2px 2px;
 
 }
 
