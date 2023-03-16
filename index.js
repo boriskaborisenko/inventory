@@ -255,7 +255,7 @@ app.get('/compare', (req, res) => {
 app.get('/compareget', async(req, res) => {
 
     await sql.connect(sqlConfig)
-    const db= await sql.query `select * from osk`
+    const db= await sql.query `select * from osk order by DATE_D DESC`
 
     const dbData = []
     const dbHarper = []

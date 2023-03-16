@@ -83,11 +83,17 @@ const insertData = (data) => {
     filtered.pages = chunkedArray
     filtered.total_pages = filtered.pages.length 
    
-    filtered.pages[0].map(p =>{
-        res.innerHTML += template(p)
-    })   
-    makePages() 
-    console.log(filtered,'INSERTDATA')
+    if(filtered.pages.length > 0){
+        filtered.pages[0].map(p =>{
+            res.innerHTML += template(p)
+        })   
+        
+        makePages() 
+    }else{
+        document.querySelector('#w').innerHTML =''
+    }
+    
+    
 }
 
 inp.addEventListener('keyup', () => {
@@ -149,6 +155,10 @@ const getData = async () => {
   
   menu[1].classList.add('actv')
     menu[0].classList.remove('actv')
+
+    document.querySelector('#total').innerHTML = ` (${filtered.all.length})`
+    document.querySelector('#innot').innerHTML = ` (${filtered.invNo.length})`
+    document.querySelector('#inyes').innerHTML = ` (${filtered.invYes.length})`
   ///fix menu
 
    insertData(filtered.all)
