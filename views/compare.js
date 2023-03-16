@@ -37,9 +37,10 @@ const switchLoader = (switcher) => {
 const template = (d) => {
     const classX = (d.inv) ? 'yep' : 'nope'
     const classY = (d.inv) ? '' : 't'
+    const style = (d.inv) ? 'style="color:#fff;"' : ''
     return `<div class="card  ${classX}">
     <div class="num ${classY}">${d.id}</div>
-    <div class="desc">${trun(d.name, 80)}</div>
+    <div class="desc"  ${style}>${trun(d.name, 80)}</div>
     <div class="date">Last invent:${d.last}</div>
     </div>`
 }
