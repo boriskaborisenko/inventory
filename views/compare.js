@@ -3,6 +3,10 @@ const inp = document.querySelector('#search')
 const res = document.querySelector('#res')
 const chunkSize = 100 
 
+
+
+     
+
 const filtered = {
     invYes:[],
     invNo:[],
@@ -12,6 +16,16 @@ const filtered = {
     total_pages: 0
    
 }
+
+const ExportData = (input) =>
+    {
+            filename='reports.xlsx';
+       data=input
+        const ws = XLSX.utils.json_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "People");
+        XLSX.writeFile(wb,filename);
+     }
 
 const clearData = () => {
     res.innerHTML = ''
@@ -173,3 +187,16 @@ const getData = async () => {
 
 
 getData()
+
+document.querySelector('#download').addEventListener('click',()=>{
+
+    const str = []
+    filtered.all.map(f=>{
+        str.push({"invNumber":f.id, "description":f.name, "LastUpdate":f.last})
+    })
+    
+    ExportData(str)
+}, false)
+
+
+     
