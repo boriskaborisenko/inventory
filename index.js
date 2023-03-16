@@ -253,33 +253,40 @@ app.get('/compare', (req, res) => {
 })
 
 app.get('/compareget', async(req, res) => {
-    console.log('get compare')
 
     await sql.connect(sqlConfig)
-    const db= await sql.query `select * from osk o`
+    const db= await sql.query `select * from osk`
 
     const dbData = []
-   db.map(d=>{
-    const one = {
-    inv:Number(d.INVNUMBER.trim()),
-    name: d.NOS
-    }
-    dbData.push(one)
-   })
+    const dbHarper = []
 
+    db.recordset.map(d=>{
+        const one = {
+            id:Number(d.INVNUMBER.trim()),
+            idStr:d.INVNUMBER.trim().toString(),
+            name: d.NOS
+        }
+        dbData.push(one)
+   }) 
+ 
     
-
-   
 
     const hdb = await axios(harpData(JSON.stringify({
         "operation": "sql",
         "sql": "SELECT * FROM FIN.inventory"
     })))
 
-    const harpDB = await JSON.stringify(hdb.data)
-    console.log(harpDB)
+    const harpDB = await hdb.data
+    
+    harpDB.map(h=>{
+        const oneH = {id:h.inv, last: h.last}
+        dbHarper.push(oneH)
+    })
 
-    res.json({data:'compare'})
+    res.json({
+        harper:dbHarper,
+        sql:dbData
+    })
 })
 
 
