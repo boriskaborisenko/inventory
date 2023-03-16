@@ -7,6 +7,7 @@ html, body{
     font-family:'Golos Text';
     font-weight: 400;
     font-size: 0.95rem;
+    background:#fff;
 }
 
 
@@ -41,23 +42,122 @@ html, body{
 .inner{
     width:80%;
     margin:0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    gap:10px 10px;
 }
 
 ul{
     padding:0;
     margin:0;
+    display: inline-block;
+    vertical-align: middle;
+    width:calc(100% - 200px);
 }
 
 ul li{
     display: inline-block;
     margin-right: 20px;
     font-weight: 600;
+    cursor:pointer;
+    
 }
 
 #finder{
-    margin-left: 100px;
+   
+}
+
+.in{
+    border-radius: 4px;
+    border:1px solid #ccc;
 }
 
 .results{
     margin:100px 0 100px 0;
+ 
+}
+
+.card{
+    width:250px;
+    height: 150px;
+    background:#fff;
+    box-sizing: border-box;
+    padding:10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 20px rgb(0,0,0, 0.13);
+}
+.num{
+    font-size: 1.2rem;
+    font-weight: 400;
+    color:#fff;
+}
+
+.desc{
+    margin:10px 0;
+    height:65px;
+    border-top:1px solid #eee;
+    padding-top:10px;
+    color:rgba(0,0,0,0.83);
+    font-weight: 600;
+    overflow-wrap: break-word;
+    
+}
+
+.yep{
+    background:#7cb518;
+}
+
+.date{
+    color:rgba(0,0,0, 0.4);
+    font-size: 0.7rem;
+}
+
+.nope{
+    background:#dce1de;
+}
+
+.t{
+    color:rgba(0,0,0,1);
+}
+
+.pages{
+    margin-bottom: 100px;
+    width:100%;
+    
+}
+
+.pager{
+    width:100%;
+    color:rgba(0,0,0, 0.45);
+    overflow-wrap: break-word;
+}
+
+.pager span {
+    margin-left: 5px;
+    cursor:pointer;
+}
+
+.actv{
+    color:#2369F6;
+}
+
+.flexpages{
+    width:80%;
+    display:flex;
+    align-items: center;
+  justify-content: space-around;
+  flex-flow: row wrap;
+
+}
+
+.px{
+    width:24px;
+    height: 24px;
+    background:transparent;
+    border-radius:4px;
+    text-align:center;
+    line-height: 20px;
+    cursor:pointer;
+
 }
