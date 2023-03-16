@@ -248,6 +248,40 @@ app.post('/dataset', async (req, res) => {
     res.json({data:lowdata})
 })
 
+app.get('/compare', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/compare.html'));
+})
+
+app.get('/compareget', async(req, res) => {
+    console.log('get compare')
+
+    await sql.connect(sqlConfig)
+    const db= await sql.query `select * from osk o`
+
+    const dbData = []
+   db.map(d=>{
+    const one = {
+    inv:Number(d.INVNUMBER.trim()),
+    name: d.NOS
+    }
+    dbData.push(one)
+   })
+
+    
+
+   
+
+    const hdb = await axios(harpData(JSON.stringify({
+        "operation": "sql",
+        "sql": "SELECT * FROM FIN.inventory"
+    })))
+
+    const harpDB = await JSON.stringify(hdb.data)
+    console.log(harpDB)
+
+    res.json({data:'compare'})
+})
+
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));
 
