@@ -123,8 +123,11 @@ app.get('/getcodedata/:inv', async (req, res) => {
     await sql.connect(sqlConfig)
     //const all = await sql.query `select * from osk o join kdk k on o.n_kdk = k.n_kdk where o.invnumber = ${id}`
     const all = await sql.query `select * from osk o where o.invnumber = ${id}`
+    await sql.connect(sqlConfig)
+    const FIO = await sql.query `select * from kdk where n_kdk = ${all.recordset[0].N_KDK}`
 
-    console.log(all)
+    const fullName = (FIO.rowsAffected[0] == 0) ? 'No name' : FIO.recordset[0].FIO_OTV
+
     if(all.rowsAffected[0] == 0){
         console.log('return error')
         return res.json({
@@ -133,7 +136,7 @@ app.get('/getcodedata/:inv', async (req, res) => {
     }
     
     const selected = {
-        fio:all.recordset[0].FIO_OTV,
+        fio: fullName,
         comm: all.recordset[0].NOS
     }
     //selected.comm = selected.comm.join(' ')
@@ -203,8 +206,8 @@ app.get('/sticker',  (req,res) => {
 
 app.get('/stickerdata/:imgs', async (req, res) => {
     await sql.connect(sqlConfig)
-   const  all = await sql.query `select * from osk where invnumber not like '%1116%'`
-   //const  all = await sql.query `select * from osk`
+   //const  all = await sql.query `select * from osk where invnumber not like '%1116%'`
+   const  all = await sql.query `select * from osk`
     console.log(all.recordset.length)
     
     const lowdata = []
