@@ -1,4 +1,7 @@
+
 const dotenv = require('dotenv').config()
+const { Server } = require("socket.io");
+const http = require('http');
 const QRCode = require("qrcode-svg");
 const barcode = require('barcode-2-svg');
 const CryptoJS = require("crypto-js")
@@ -19,6 +22,13 @@ const sqlConfig = {
         trustServerCertificate: true,
     }
 }
+
+
+
+
+
+
+
 
 const harpData = (data) => {
     return {
@@ -67,6 +77,27 @@ app.use('/views', express.static(path.join(__dirname, '/views')))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+const server = http.createServer(app);
+const io = new Server(server);
+/////socket.io
+
+io.on('connection', (socket) => {
+    const id = '3712837129837'
+    console.log('a user connected', socket.id)
+    socket.emit('hello',socket.id)
+
+    socket.on('toServ', (data) => {
+        console.log(data)
+    })
+
+    socket.on('magic', (data) => {
+        console.log(data)
+        io.emit('outMagic', data)
+    })
+  });
+
+/////socke end
+
 
 app.get('/', (req,res) => {
     res.sendFile(path.join(__dirname, 'views/home.html'));
@@ -90,8 +121,8 @@ app.get('/getcodedata/:inv', async (req, res) => {
     const id = Number(originalText)
     console.log(id)
     await sql.connect(sqlConfig)
-    const all = await sql.query `select * from osk o join kdk k on o.n_kdk = k.n_kdk where o.invnumber = ${id}`
-    //const all = await sql.query `select * from osk o where o.invnumber = ${id}`
+    //const all = await sql.query `select * from osk o join kdk k on o.n_kdk = k.n_kdk where o.invnumber = ${id}`
+    const all = await sql.query `select * from osk o where o.invnumber = ${id}`
 
     console.log(all)
     if(all.rowsAffected[0] == 0){
@@ -187,8 +218,8 @@ app.get('/stickerdata/:imgs', async (req, res) => {
         console.log(id, a.NOS, url)
 
         if(req.params.imgs == 'with'){
-             makeQR(url,index)
-             makeBarcode(id,index)
+             makeQR(url,id)
+             makeBarcode(id,id)
         }
 
        
@@ -196,8 +227,8 @@ app.get('/stickerdata/:imgs', async (req, res) => {
             inv:Number(id), 
             name: a.NOS, 
             url:url,
-            qr: index+'.svg',
-            bar:index+'.svg'
+            qr: id+'.svg',
+            bar:id+'.svg'
         })
         
 
@@ -297,6 +328,9 @@ app.get('/compareget', async(req, res) => {
 })
 
 
-app.listen(port, () => console.log(`Server listening on port ${port}!`));
+//app.listen(port, () => console.log(`Server listening on port ${port}!`));
+server.listen(port, () => console.log(`Server listening on port ${port}!`));
+
+
 
 

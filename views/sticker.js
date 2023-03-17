@@ -65,6 +65,7 @@ Wait while we get data<br>
             bar:d.bar
         }
         stickers.push(sticker)
+        
     })
         
         
@@ -75,7 +76,6 @@ Wait while we get data<br>
         let str = ''
         stickers.map((s, i) => {
             str += template(s)
-                
             if((i+1) % 44 == 0 || (i+1) == stickers.length){
                 ps.push(str)
                 str = ''

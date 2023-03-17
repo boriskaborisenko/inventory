@@ -1,6 +1,14 @@
 console.log('makestickers')
 
 
+
+const socket = io('ws://localhost:3000')
+socket.on('outMagic', (data)=>{
+    //console.log(data)
+    document.querySelector('#area').value = data
+})
+
+
 const gen = document.querySelector('#gen')
 const textarea = document.querySelector('#area')
 

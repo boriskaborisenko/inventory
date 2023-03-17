@@ -1,3 +1,10 @@
+
+/////socket
+
+const socket = io('ws://localhost:3000')
+
+
+
 const menu = document.querySelectorAll('.m')
 const inp = document.querySelector('#search')
 const res = document.querySelector('#res')
@@ -85,6 +92,7 @@ const cp = (el) => {
     buffer.setSelectionRange(0, 99999)
     navigator.clipboard.writeText(buffer.value)
     console.log(filtered.buffer, filtered.buffer_str)
+    socket.emit('magic',filtered.buffer_str)
 }
 
 const makePages = () => {
@@ -157,6 +165,7 @@ menu.forEach(m=>{
 
         menu.forEach(m=>m.classList.remove('actv'))
         m.classList.add('actv')
+        inp.value = ''
 
         const actions = {
             'yes': () => insertData(filtered.invYes),
@@ -243,6 +252,10 @@ document.querySelector('#download').addEventListener('click',()=>{
     
     ExportData(str)
 }, false)
+
+
+
+
 
 
      
