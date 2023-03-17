@@ -31,6 +31,7 @@ const ExportData = (input) =>
      }
 
 const clearData = () => {
+    buffer.value = ''
     res.innerHTML = ''
     filtered.invYes = []
     filtered.invNo = []
