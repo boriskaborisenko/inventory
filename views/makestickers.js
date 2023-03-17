@@ -56,7 +56,7 @@ const apiPost = async (endpoint,dataset) => {
           </div>`
   }
 
-const ps = []
+let ps = []
 
 const trun = (str, length) => {
         return str.length > length
@@ -65,7 +65,7 @@ const trun = (str, length) => {
       }
 
 
-      const stickers = []
+      let stickers = []
 
       const mypdf = async  (answer) => {
      
@@ -125,10 +125,12 @@ gen.addEventListener('click', async ()=>{
     
     const dataset = createSet(textarea.value)
     console.log(dataset)
-    
+    all.innerHTML = ''
+    stickers = []
+    ps = []
     const answer = await apiPost('/dataset', dataset)
     console.log(answer)
-
+    
     mypdf(answer)
 
 
