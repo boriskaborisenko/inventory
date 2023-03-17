@@ -119,7 +119,6 @@ app.get('/getcodedata/:inv', async (req, res) => {
     
     
     const id = Number(originalText)
-    console.log(id)
     await sql.connect(sqlConfig)
     //const all = await sql.query `select * from osk o join kdk k on o.n_kdk = k.n_kdk where o.invnumber = ${id}`
     const all = await sql.query `select * from osk o where o.invnumber = ${id}`
