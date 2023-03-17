@@ -261,10 +261,15 @@ app.get('/compareget', async(req, res) => {
     const dbHarper = []
 
     db.recordset.map(d=>{
+        let getDate = '—'
+        if(d.DATE_D){
+            getDate = moment(d.DATE_D).format('DD.MM.YYYY')
+        }
         const one = {
             id:Number(d.INVNUMBER.trim()),
             idStr:d.INVNUMBER.trim().toString(),
-            name: d.NOS
+            name: d.NOS,
+            date: getDate
         }
         dbData.push(one)
    }) 
@@ -279,7 +284,7 @@ app.get('/compareget', async(req, res) => {
     const harpDB = await hdb.data
     
     harpDB.map(h=>{
-        const oneH = {id:h.inv, last: h.last}
+        const oneH = {id:h.inv, last: moment(h.last).format('DD.MM.YYYY | hh:mm')}
         dbHarper.push(oneH)
     })
 

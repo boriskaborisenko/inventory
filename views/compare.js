@@ -53,9 +53,9 @@ const template = (d) => {
     const classY = (d.inv) ? '' : 't'
     const style = (d.inv) ? 'style="color:#fff;"' : ''
     return `<div class="card  ${classX}">
-    <div class="num ${classY}">${d.id}</div>
+    <div class="num ${classY}">${d.id} <div class="ddate">Added: ${d.date}</div></div>
     <div class="desc"  ${style}>${trun(d.name, 80)}</div>
-    <div class="date">Last invent:${d.last}</div>
+    <div class="date">Inventory: ${d.last}</div>
     </div>`
 }
 
@@ -111,7 +111,7 @@ const insertData = (data) => {
 }
 
 inp.addEventListener('keyup', () => {
-    const search = filtered.all.filter(x => x.idStr.includes(inp.value) )
+    const search = filtered.all.filter( x => x.idStr.includes(inp.value) || x.name.toLowerCase().includes(inp.value) )
     insertData(search)
     ///fix menu
 
@@ -149,8 +149,26 @@ const getData = async () => {
     
     const allCall = await fetch('/compareget')
     const data = await allCall.json()
+
+    ////filter weapons 
+
+    const withoutWeapons = []
     
-   data.sql.map((s)=>{
+    data.sql.map((x=>{
+        if (
+            !x.name.toLowerCase().includes('5,45') && 
+            !x.name.toLowerCase().includes('7,62') &&
+            !x.name.toLowerCase().includes('пістолет пм') &&
+            !x.name.toLowerCase().includes(' кулемет ') 
+            ){
+            withoutWeapons.push(x)
+        }
+    }))
+   
+     //////////////////////////
+    
+   //data.sql.map((s)=>{
+    withoutWeapons.map((s) => {
     const x = data.harper.filter(f => f.id === s.id)
     if(x.length > 0){
         s.inv = true
@@ -165,14 +183,15 @@ const getData = async () => {
     filtered.all.push(s)
    })
 
-  ///fix menu
-  
-  menu[1].classList.add('actv')
-    menu[0].classList.remove('actv')
+   //console.log(filtered)
 
-    document.querySelector('#total').innerHTML = ` (${filtered.all.length})`
-    document.querySelector('#innot').innerHTML = ` (${filtered.invNo.length})`
-    document.querySelector('#inyes').innerHTML = ` (${filtered.invYes.length})`
+  ///fix menu
+  menu[1].classList.add('actv')
+  menu[0].classList.remove('actv')
+
+  document.querySelector('#total').innerHTML = ` (${filtered.all.length})`
+  document.querySelector('#innot').innerHTML = ` (${filtered.invNo.length})`
+  document.querySelector('#inyes').innerHTML = ` (${filtered.invYes.length})`
   ///fix menu
 
    insertData(filtered.all)
