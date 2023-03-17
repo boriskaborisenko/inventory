@@ -87,7 +87,26 @@ ul li{
     padding:10px;
     border-radius: 10px;
     box-shadow: 0 2px 20px rgb(0,0,0, 0.13);
+    border:3px solid transparent;
+    position:relative;
 }
+
+.micromark{
+    width:24px;
+    height: 24px;
+    background:rgba(0,0,0,0.06);
+    border-radius: 4px;
+    position:absolute;
+    bottom:5px;
+    right:5px;
+    cursor:pointer;
+}
+
+.sel{
+    background:url('check.png') center center no-repeat #2369F6;
+    background-size: contain;
+}
+
 .num{
     font-size: 1.2rem;
     font-weight: 400;

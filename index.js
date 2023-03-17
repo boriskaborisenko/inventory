@@ -213,7 +213,8 @@ app.get('/makestickers', (req, res) => {
 
 app.post('/dataset', async (req, res) => {
     
-    const queryIds = `select * from osk o join kdk k on o.n_kdk = k.n_kdk where o.invnumber in (${req.body.join(', ')})`
+    //const queryIds = `select * from osk o join kdk k on o.n_kdk = k.n_kdk where o.invnumber in (${req.body.join(', ')})`
+    const queryIds = `select * from osk o where o.invnumber in (${req.body.join(', ')})`
     await sql.connect(sqlConfig)
     const all = await sql.query(queryIds)
     

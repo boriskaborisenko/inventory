@@ -1,6 +1,7 @@
 const menu = document.querySelectorAll('.m')
 const inp = document.querySelector('#search')
 const res = document.querySelector('#res')
+const buffer = document.querySelector('#buffer')
 const chunkSize = 100 
 
 
@@ -13,7 +14,9 @@ const filtered = {
     all:[],
     pages:[],
     page: 0,
-    total_pages: 0
+    total_pages: 0,
+    buffer:[],
+    buffer_str:''
    
 }
 
@@ -35,6 +38,8 @@ const clearData = () => {
     filtered.pages = []
     filtered.page= 0
     filtered.total_pages = 0
+    filtered.buffer = []
+    filtered.buffer_str = ''
     
 }
 
@@ -56,11 +61,30 @@ const template = (d) => {
     <div class="num ${classY}">${d.id} <div class="ddate">Added: ${d.date}</div></div>
     <div class="desc"  ${style}>${trun(d.name, 80)}</div>
     <div class="date">Inventory: ${d.last}</div>
+    <div id="${d.id}" class="micromark"  onClick="cp(this)"></div>
     </div>`
 }
 
 
-
+const cp = (el) => {
+    const isExist = filtered.buffer.includes(el.id)
+    if(!isExist){
+        filtered.buffer.push(el.id)
+        el.classList.add('sel')
+    }else{
+        filtered.buffer.map((f,i)=>{
+            if(f == el.id)
+            filtered.buffer.splice(i, 1)
+        })
+        el.classList.remove('sel')
+    }
+    filtered.buffer_str = filtered.buffer.join(',')
+    buffer.value = filtered.buffer_str
+    buffer.select()
+    buffer.setSelectionRange(0, 99999)
+    navigator.clipboard.writeText(buffer.value)
+    console.log(filtered.buffer, filtered.buffer_str)
+}
 
 const makePages = () => {
     const pager = document.querySelector('#w')
@@ -86,6 +110,9 @@ const makePages = () => {
 }
 
 const insertData = (data) => {
+    buffer.value = ''
+    filtered.buffer = []
+    filtered.buffer_str = ''
     window.scrollTo(0,0)
    res.innerHTML = '' 
   
