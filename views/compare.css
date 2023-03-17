@@ -37,7 +37,7 @@ html, body{
     position: fixed;
     background: #fff;
     top:0;
-    z-index:100;
+    z-index:9;
 }
 
 .inner{

@@ -158,8 +158,7 @@ const getData = async () => {
         if (
             !x.name.toLowerCase().includes('5,45') && 
             !x.name.toLowerCase().includes('7,62') &&
-            !x.name.toLowerCase().includes('пістолет пм') &&
-            !x.name.toLowerCase().includes(' кулемет ') 
+            !x.name.toLowerCase().includes('пістолет пм')
             ){
             withoutWeapons.push(x)
         }
