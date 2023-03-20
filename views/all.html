@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="../views/all.css">
+    <title>Inventory App</title>
+</head>
+<body id="b">
+    <div class="loader">
+        <div class="inloader">
+            <img style="width:200px;" src="https://thumbs.gfycat.com/HugeDeliciousArchaeocete-max-1mb.gif">
+        </div>
+    </div>
+   
+    <div id="app" class="fullapp">
+        <div class="left_menu">
+            <div class="left_fix">
+                <div class="left_inner">
+                    <div class="logo">
+                        <img src="../views/brcl.png" alt="">
+                    </div>
+                    <div class="left_nav">
+                        <ul>
+                            <li class="nav_item active_side_nav" id="inventory">Inventory</li>
+                            <li class="nav_item" id="createStickers">Stickers</li>
+                            <li class="nav_item" id="allStickers">All stickers</li>
+                            <li class="nav_item" id="onPhone">On Phone</li>
+                            <li class="nav_item" id="help">Help</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+        </div>
+        <div class="container">
+            
+            <!--MAIN PART-->
+            <div class="inner">
+                
+                <div class="view " id="inventory_view">
+                    <div class="top_nav">
+                        <ul class="compareUl">
+                            <!--<li class="m compareLi" id="updt" style="color:rgba(0,0,0,0.44);">Update</li>-->
+                            <li class="m compareLi actv" id="all">Total<span id="total"></span></li>
+                            <li class="m compareLi" id="not">Not Inventered <span id="innot"></span></li>
+                            <li class="m compareLi" id="yes">Inventered <span id="inyes"></span></li>
+                            <li class="compareLi" id="download">XLSX</li>
+                            <li class="compareLi"> <input class="in" type="text" id="search"></li>
+                        </ul>
+                       
+                    </div>
+                    <div class="main">
+                        <input  id="buffer" type="text" hidden>
+                        <div id="res">results</div>
+                        <div class="pager flexpages" id="w"></div>
+                    </div>
+                </div>    
+            
+            
+                <div class="view off" id="createStickers_view" style="overflow:hidden;">
+                    
+                    <div class="main">
+                        <div class="titleMe">Stickers generator</div>
+                        <div>
+                            <textarea name="" id="area" class="myarea" rows="10" placeholder="Enter inv separated by comma"></textarea>
+                        </div>
+                        <div style="font-size: 0.8rem;">
+                            Max 108 invnumbers
+                        </div>
+                        <div>
+                            <button id="gen">Generate</button>
+                        </div>
+                        <div class="xx">
+                            <div class="pdf"></div>
+                        </div>
+                    </div>
+                </div>   
+
+
+                <div class="view off" id="allStickers_view">
+                    
+                    <div class="main">
+                        <div class="titleMe">All stickers maker</div>
+                        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, error nulla tempore excepturi consectetur beatae libero voluptatum quaerat recusandae tempora itaque illo est deleniti quo. Delectus, odit voluptate? Sint, beatae!</div>
+                        <div>
+                            <button id="genAll">Yes, Generate ALL stickers</button>
+                        </div>
+                        <div class="allX" id="allX"></div>
+                    </div>
+                </div>  
+                
+                <div class="view off" id="onPhone_view">
+                    <div class="main">
+                        <div class="titleMe">Phone preview</div>
+                        <iframe src="./code/U2FsdGVkX1+lmVaqCYftZwHudz80xVR2k6BubYQzFD0=" style="height: 600px;" frameborder="0"></iframe>
+                    </div>
+                </div>  
+
+                <div class="view off" id="help_view">
+                    <div class="main">
+                        <div class="titleMe">Help</div>
+                        <div>
+                            <ul>
+                                <li>a</li>
+                                <li>b</li>
+                                <li>c</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>  
+            
+            
+            
+            </div>
+            <!--MAIN PART-->
+
+        </div>
+    </div>
+    <script src="../views/all.js"></script>
+</body>
+</html>

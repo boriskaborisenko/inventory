@@ -1,14 +1,14 @@
 const code = window.location.href.split('/code/')[1]
 const codeData = {code, harp:false}
 
-const successCallback = (position) => {
+/* const successCallback = (position) => {
     console.log(position.coords);
     alert(position.coords.latitude)
   };
   
   const errorCallback = (error) => {
     console.log(error);
-  };
+  }; */
   
   //navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
@@ -24,9 +24,11 @@ const load = document.querySelector('.preloader')
 const btn = document.querySelector('#mark')
 const info = document.querySelector('.info')
 const err = document.querySelector('.err')
+const codebar = document.querySelector('#codebar')
 
 const pasteData = (d) => {
     if(d.id !== undefined){
+        codebar.src = `../views/barcodes/${d.id}.svg`
         inv.innerHTML = d.id
         details.innerHTML = d.inv.comm
         person.innerHTML = 'МВО: '+d.inv.fio
@@ -48,7 +50,7 @@ fetch("/getcodedata/"+codeData.code).then(response=>response.json())
     codeData.inv = data.data
     codeData.id = data.id
     codeData.harp = data.harp
-    console.log(codeData)
+    //console.log(codeData)
     pasteData(codeData)
 })
 

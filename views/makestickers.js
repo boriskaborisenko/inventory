@@ -48,7 +48,7 @@ const apiPost = async (endpoint,dataset) => {
       }
   };
   
-  const template = (sticker) => { 
+  const templateSticker = (sticker) => { 
   
   
           return `<div class="one">
@@ -94,7 +94,7 @@ const trun = (str, length) => {
           
               let str = ''
               stickers.map((s, i) => {
-                  str += template(s)
+                  str += templateSticker(s)
                       
                   if((i+1) % 44 == 0 || (i+1) == stickers.length){
                       ps.push(str)

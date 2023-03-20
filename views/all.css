@@ -1,15 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600;700;800&family=Poppins:wght@600&display=swap');
-html, body{
-    width:100%;
-    /*min-height: 100vh;*/
-    padding:0;
-    margin:0;
-    font-family:'Golos Text';
-    font-weight: 400;
-    font-size: 0.95rem;
-    background:#fff;
-}
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600;700;800&family=Poppins:wght@600&family=Roboto+Condensed&display=swap');
 
+html, body{
+    margin:0;
+    padding:0;
+    font-family: 'Golos Text';
+    font-size: 0.95rem;
+    min-height: 100vh;
+    color:rgba(0,0,0,0.65);
+}
 
 .loader{
     position:fixed;
@@ -21,57 +19,101 @@ html, body{
     display: flex;
     align-items: center;
   justify-content: center;
+  display: none;
+}
+.noflow{
+    overflow-y:hidden;
 }
 
-.intop{
-    width:80%;
-    margin:10px auto;
+.off{
+    display: none;
 }
 
-.top{
+.fullapp{
+    position:relative;
     width:100%;
-    box-sizing: border-box;
-    padding: 8px 0;
-    margin: auto auto;
-    box-shadow: 0 3px 25px rgb(0 0 0 / 0.2);
+    height: 100%;
+}
+
+.left_menu{
+    width:190px;
+    vertical-align: top;
+    display: inline-block;
+    position:relative;
+}
+
+.left_fix{
+    width:190px;
+    height: 100vh;
+    background:#eee;
     position: fixed;
-    background: #fff;
-    top:0;
-    z-index:9;
+}
+
+.active_side_nav{
+    color:red;
+}
+
+.left_inner{
+    position:absolute;
+    width:100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding:0px 20px 20px 20px;
+    overflow-y: hidden;
+}
+
+.nav_item{
+    cursor:pointer;
+}
+
+.container{
+    width:calc(100% - 200px);
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    height: 300px;
 }
 
 .inner{
-    width:80%;
-    margin:0 auto;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-start;
-    gap:10px 10px;
+    width:100%;
+    position:relative;
+    display: block;
 }
 
-ul{
-    padding:0;
-    margin:0;
-    display: inline-block;
-    vertical-align: middle;
-    width:calc(100% - 200px);
+.top_nav{
+    padding:20px;
+    border-bottom:1px solid #eee;
+    box-sizing: border-box;
 }
 
-ul li{
-    display: inline-block;
-    margin-right: 20px;
-    font-weight: 600;
-    cursor:pointer;
+.main{
+    box-sizing: border-box;
+    padding:20px;
+}
+
+.view{
+    position:relative;
+}
+
+
+
+.titleMe{
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: 700;
     
 }
 
-#finder{
-   
-}
+/* ==== compare ====*/
+
 
 .in{
-    border-radius: 4px;
+    border-radius: 8px;
     border:1px solid #ccc;
+    width:200px;
+    padding:7px;
+    margin-left: 30px;
+    outline:none;
 }
 
 .results{
@@ -152,6 +194,7 @@ ul li{
     width:100%;
     color:rgba(0,0,0, 0.45);
     overflow-wrap: break-word;
+    margin-bottom: 100px;
 }
 
 .pager span {
@@ -193,23 +236,47 @@ ul li{
     position:absolute;
 }
 
-/*   ====    stickers    =====   */
+#res{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    gap:10px 10px;
+    margin-bottom:20px;
+}
+
+ul.compareUl{
+    padding:0;
+    margin:0;
+    display: inline-block;
+    vertical-align: middle;
+    width:calc(100% - 200px);
+}
+
+li.compareLi{
+    display: inline-block;
+    margin-right: 20px;
+    font-weight: 600;
+    cursor:pointer;
+    
+}
+
+
+/*====== MAKE STICKERS========*/
 
 .pdf{
     padding:1.5mm 0 0 2mm ;
     width:210mm;
     min-height: 297mm;
     box-sizing: border-box;
-    margin:0 auto;
     background:#fff;
     overflow-y: hidden;
 }
 
 
 .one{
-    width:48mm;
-    height: 24mm;
-    border:1px dotted #eee;
+    width:65mm;
+    height: 30mm;
+    border:1px dotted #ddd;
     border-radius: 10px;
     box-sizing: border-box;
     padding: 3mm;
@@ -219,6 +286,7 @@ ul li{
     vertical-align:top;
     margin-bottom:2.8mm;
     position:relative;
+    color:#000;
 }
 
 .l{
@@ -235,9 +303,9 @@ ul li{
 
 .r{
     position:absolute;
-    width:15mm;
-    bottom:4px;
-    right:2px;
+    width:21mm;
+    bottom:5px;
+    right:3px;
     z-index:2;
 }
 
@@ -251,11 +319,11 @@ img{
 
 .num{
     font-weight: bold;
-    font-size: 12pt;
+    font-size: 14pt;
 }
 
 .anno{
-    font-size: 6pt;
+    font-size: 7pt;
     height:20px;
 }
 
@@ -264,28 +332,35 @@ img{
 }
 
 .x{
-    width:70%;
+    width:65%;
   margin-top:2px;
 }
 
 .stid{
     text-align:left;
-    font-size:8pt;
+    font-size:12pt;
+    margin-top:2px;
     font-family:'Poppins';
 }
 
 .xx{
     width:210mm;
     min-height: 297mm;
-    margin:0 auto;
     background:#fff;
     overflow-y: hidden;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    box-shadow: 0 3px 20px rgb(0 0 0 / 0.2);
 }
 
 .myarea{
-    width:100%;
+    width:210mm;
     resize: none;
+    border-radius: 6px;
+    border-color:#eee;
+    background:#fafbfc;
+    padding:10px;
+    box-sizing: border-box;
+    outline:none;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.23);
 }
 
 #gen{
@@ -296,4 +371,7 @@ img{
     cursor: pointer;
     background-color: #2369F6;
     color:#fff;
+    width:210mm;
+    margin-bottom:30px;
+    margin-top:14px;
 }

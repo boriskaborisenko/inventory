@@ -81,7 +81,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 /////socket.io
 
-io.on('connection', (socket) => {
+/* io.on('connection', (socket) => {
     const id = '3712837129837'
     console.log('a user connected', socket.id)
     socket.emit('hello',socket.id)
@@ -94,13 +94,13 @@ io.on('connection', (socket) => {
         console.log(data)
         io.emit('outMagic', data)
     })
-  });
+  }); */
 
 /////socke end
 
 
 app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, 'views/home.html'));
+    res.sendFile(path.join(__dirname, 'views/all.html'));
 })
 
 
@@ -199,19 +199,31 @@ app.get('/mark/:inv', async (req, res) => {
 
 
 ////// stickers strat ////////////
-app.get('/sticker',  (req,res) => {
+/* app.get('/sticker',  (req,res) => {
     res.sendFile(path.join(__dirname, 'views/sticker.html'));
-})
+}) */
 
 app.get('/stickerdata/:imgs', async (req, res) => {
     await sql.connect(sqlConfig)
    //const  all = await sql.query `select * from osk where invnumber not like '%1116%'`
    const  all = await sql.query `select * from osk`
     console.log(all.recordset.length)
+
+    const withoutWeapons = []
+    
+    all.recordset.map((x=>{
+        if (
+            !x.NOS.toLowerCase().includes('5,45') && 
+            !x.NOS.toLowerCase().includes('7,62') &&
+            !x.NOS.toLowerCase().includes('пістолет пм')
+            ){
+            withoutWeapons.push(x)
+        }
+    }))
     
     const lowdata = []
-    all.recordset.map((a, index) => {
-
+    //all.recordset.map((a, index) => {
+    withoutWeapons.map((a, index) => {
         const id = a.INVNUMBER.trim()
         const preUrl = CryptoJS.AES.encrypt(id, process.env.AESSECRET).toString()
         const killSlash = preUrl.replace(/\//g,"xAzX")
@@ -241,9 +253,9 @@ app.get('/stickerdata/:imgs', async (req, res) => {
 })
 ////////sticker end ///////////////
 
-app.get('/makestickers', (req, res) => {
+/* app.get('/makestickers', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/makestickers.html'));
-})
+}) */
 
 app.post('/dataset', async (req, res) => {
     
@@ -283,9 +295,9 @@ app.post('/dataset', async (req, res) => {
     res.json({data:lowdata})
 })
 
-app.get('/compare', (req, res) => {
+/* app.get('/compare', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/compare.html'));
-})
+}) */
 
 app.get('/compareget', async(req, res) => {
 
