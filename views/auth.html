@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    auth
+    <input type="text" id="user" value="admin">
+    <input type="text" id="pass" value = "password">
+    <button id="authbtn">auth</button>
+    
+    <script>
+        const user = document.querySelector('#user')
+        const pass = document.querySelector('#pass')
+        const btn = document.querySelector('#authbtn')
+
+    
+
+  btn.addEventListener('click', async () => {
+    console.log('auth', user.value)
+    const forAuth = await fetch('/auth', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({user:user.value, pass:pass.value})
+            });
+            const isAuth = await forAuth.json();
+            console.log(isAuth,'isauth')
+  }, false)
+
+    </script>
+</body>
+</html>

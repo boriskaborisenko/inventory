@@ -1,4 +1,53 @@
-console.log('all app')
+
+const app = document.querySelector("#app")
+const auth = document.querySelector('#auth')
+const user =  document.querySelector('#user')
+const pass =  document.querySelector('#pass')
+const btn =  document.querySelector('#authbtn')
+const creds = {auth:false, pass:false}
+
+const myheaders =  (pass) => {
+    return {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authentication': pass}
+}
+
+const simpleAuth = async () => {
+    console.log(creds)
+   
+    if(creds.auth){
+        getData()
+        app.classList.remove('off')
+        auth.classList.add('off')
+    }else{
+        app.classList.add('off')
+        auth.classList.remove('off')
+    }
+ }
+
+btn.addEventListener('click', async () => {
+    console.log('auth', user.value)
+    const forAuth = await fetch('/auth', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({user:user.value, pass:pass.value})
+            });
+            const isAuth = await forAuth.json();
+            creds.auth = isAuth.auth
+            creds.pass = isAuth.pass
+            simpleAuth()
+            
+  }, false)
+
+
+simpleAuth()
+
+
+
 
 const filtered = {
     invYes:[],
@@ -216,7 +265,9 @@ const getData = async () => {
     switchLoader(true)
     clearData()
     
-    const allCall = await fetch('/compareget')
+    const allCall = await fetch('/compareget', {
+       headers:myheaders(creds.pass)
+    })
     const data = await allCall.json()
 
     ////filter weapons 
@@ -267,7 +318,7 @@ const getData = async () => {
   
 }
 
-getData()
+
 
 document.querySelector('#download').addEventListener('click',()=>{
 
@@ -297,10 +348,7 @@ const createSet = (input) => {
 const apiPost = async (endpoint,dataset) => {
     const rawResponse = await fetch(endpoint, {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: myheaders(creds.pass),
       body: JSON.stringify(dataset)
     });
     const content = await rawResponse.json();
@@ -422,7 +470,7 @@ let stickersAll = []
 const mypdfAll = async  () => {
     document.getElementById('b').classList.add('noflow')
     switchLoader(true)
-        const data = await fetch("/stickerdata/with")
+        const data = await fetch("/stickerdata/with", {headers:myheaders(creds.pass)})
         const json = await data.json()
         
          json.data.map(d=>{
@@ -480,3 +528,12 @@ const mypdfAll = async  () => {
     document.querySelector('#genAll').addEventListener('click', ()=>{
         mypdfAll()
     }, false)
+
+
+
+    //getData()
+
+
+   
+
+ 

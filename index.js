@@ -97,6 +97,23 @@ const io = new Server(server);
   }); */
 
 /////socke end
+const isAuth = (req, res, next) => {
+    const auth = req.headers.authentication;
+    if (auth === process.env.USERPASS) {
+      next();
+    } else {
+      res.sendFile(path.join(__dirname, 'views/auth.html'));
+    }
+}
+
+app.post('/auth', (req, res) => {
+    console.log(req.body.pass)
+    if(req.body.pass == process.env.USERPASS && req.body.user == process.env.USERNAME){
+        res.json({auth:true, pass:process.env.USERPASS})
+    }else(
+        res.json({auth:false, pass: false})
+    )
+})
 
 
 app.get('/', (req,res) => {
@@ -105,14 +122,15 @@ app.get('/', (req,res) => {
 
 
 
+
 ///// mobile inventory logic start ////////
 
-app.get('/code/:inv', async (req, res) => {
+app.get('/code/:inv',  async (req, res) => {
     res.sendFile(path.join(__dirname, 'views/code.html'));
 })
 
 
-app.get('/getcodedata/:inv', async (req, res) => {
+app.get('/getcodedata/:inv',  async (req, res) => {
     const addSlash = req.params.inv.replace(/xAzX/g,"/")
     const bytes  = CryptoJS.AES.decrypt(addSlash, process.env.AESSECRET);
     const originalText = bytes.toString(CryptoJS.enc.Utf8);
@@ -203,7 +221,7 @@ app.get('/mark/:inv', async (req, res) => {
     res.sendFile(path.join(__dirname, 'views/sticker.html'));
 }) */
 
-app.get('/stickerdata/:imgs', async (req, res) => {
+app.get('/stickerdata/:imgs', isAuth, async (req, res) => {
     await sql.connect(sqlConfig)
    //const  all = await sql.query `select * from osk where invnumber not like '%1116%'`
    const  all = await sql.query `select * from osk`
@@ -257,7 +275,7 @@ app.get('/stickerdata/:imgs', async (req, res) => {
     res.sendFile(path.join(__dirname, 'views/makestickers.html'));
 }) */
 
-app.post('/dataset', async (req, res) => {
+app.post('/dataset', isAuth, async (req, res) => {
     
     //const queryIds = `select * from osk o join kdk k on o.n_kdk = k.n_kdk where o.invnumber in (${req.body.join(', ')})`
     const queryIds = `select * from osk o where o.invnumber in (${req.body.join(', ')})`
@@ -299,7 +317,7 @@ app.post('/dataset', async (req, res) => {
     res.sendFile(path.join(__dirname, 'views/compare.html'));
 }) */
 
-app.get('/compareget', async(req, res) => {
+app.get('/compareget', isAuth, async(req, res) => {
 
     await sql.connect(sqlConfig)
     const db= await sql.query `select * from osk order by DATE_D DESC`
