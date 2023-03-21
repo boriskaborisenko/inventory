@@ -173,6 +173,7 @@ const cp = (el) => {
     buffer.setSelectionRange(0, 99999)
     navigator.clipboard.writeText(buffer.value)
     console.log(filtered.buffer, filtered.buffer_str)
+    textarea.value = filtered.buffer_str
     
 }
 
