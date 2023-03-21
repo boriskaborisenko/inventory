@@ -8,6 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="../views/all.css">
     <title>Inventory App</title>
+    <link rel="icon" href="http://simpleicon.com/wp-content/uploads/rocket.svg">
 </head>
 <body id="b">
     <div class="loader">
@@ -17,9 +18,11 @@
     </div>
 
     <div id="auth" class="off">
-        <input type="text" id="user" value="shdfgTyuwetr73" placeholder="username">
-        <input type="text" id="pass" value="QWRT#%@Ty632twyutegdv=-212-3" placeholder="password">
-        <button id="authbtn">auth</button>
+        <div class="enter">
+            <div class="ix"><input class="ixi" type="text" id="user" value="" placeholder="username"></div>
+            <div class="ix"><input class="ixi" type="password" id="pass" value="" placeholder="password"></div>
+            <div class="ixb"><button class="ixib" id="authbtn">Sign In</button></div>
+        </div>   
     </div>
    
     <div id="app" class="fullapp">
@@ -30,11 +33,11 @@
                         <img src="../views/brcl.png" alt="">
                     </div>
                     <div class="left_nav">
-                        <ul>
+                        <ul class="nav_ul">
                             <li class="nav_item active_side_nav" id="inventory">Inventory</li>
                             <li class="nav_item" id="createStickers">Stickers</li>
                             <li class="nav_item" id="allStickers">All stickers</li>
-                            <li class="nav_item" id="onPhone">On Phone</li>
+                            <li class="nav_item" id="onPhone">Phone views</li>
                             <li class="nav_item" id="help">Help</li>
                         </ul>
                     </div>
@@ -88,11 +91,11 @@
 
                 <div class="view off" id="allStickers_view">
                     
-                    <div class="main">
+                    <div class="main" style="max-width: 800px;">
                         <div class="titleMe">All stickers maker</div>
-                        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, error nulla tempore excepturi consectetur beatae libero voluptatum quaerat recusandae tempora itaque illo est deleniti quo. Delectus, odit voluptate? Sint, beatae!</div>
+                        <div style="margin-bottom:20px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, error nulla tempore excepturi consectetur beatae libero voluptatum quaerat recusandae tempora itaque illo est deleniti quo. Delectus, odit voluptate? Sint, beatae!</div>
                         <div>
-                            <button id="genAll">Yes, Generate ALL stickers</button>
+                            <button id="genAll" class="defBtn">Yes, Generate ALL stickers</button>
                         </div>
                         <div class="allX" id="allX"></div>
                     </div>

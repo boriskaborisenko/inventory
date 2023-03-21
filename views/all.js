@@ -14,12 +14,10 @@ const myheaders =  (pass) => {
 }
 
 const simpleAuth = async () => {
-    console.log(creds)
-   
-    if(creds.auth){
-        getData()
+     if(creds.auth){
         app.classList.remove('off')
         auth.classList.add('off')
+        getData()
     }else{
         app.classList.add('off')
         auth.classList.remove('off')
@@ -27,8 +25,7 @@ const simpleAuth = async () => {
  }
 
 btn.addEventListener('click', async () => {
-    console.log('auth', user.value)
-    const forAuth = await fetch('/auth', {
+        const forAuth = await fetch('/auth', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -39,6 +36,9 @@ btn.addEventListener('click', async () => {
             const isAuth = await forAuth.json();
             creds.auth = isAuth.auth
             creds.pass = isAuth.pass
+            if(!creds.auth){
+                alert('Wrong user/pass')
+            }
             simpleAuth()
             
   }, false)
@@ -46,7 +46,7 @@ btn.addEventListener('click', async () => {
 
 simpleAuth()
 
-
+///////////////////////////////////////////////
 
 
 const filtered = {
