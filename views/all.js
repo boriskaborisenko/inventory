@@ -133,6 +133,7 @@ const clearData = () => {
     filtered.buffer = []
     filtered.buffer_str = ''
     inp.value = ''
+    textarea.value = ''
     
 }
 
