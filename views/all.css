@@ -56,7 +56,7 @@ html, body{
 }
 
 .active_side_nav{
-    color:#2369F6;
+    color:#000!important;
 }
 
 .left_inner{
@@ -76,8 +76,9 @@ html, body{
 .nav_item{
     cursor:pointer;
     list-style: none;
-    border-bottom:1px solid #eee;
+    border-bottom:1px solid transparent;
     padding:6px 0 6px 14px;
+    color:rgba(0,0,0,0.3);
 }
 
 .container{
@@ -95,7 +96,7 @@ html, body{
 }
 
 .top_nav{
-    padding:20px;
+    padding:20px 0 20px 20px;
     border-bottom:1px solid #eee;
     box-sizing: border-box;
 }
@@ -124,9 +125,9 @@ html, body{
 .in{
     border-radius: 8px;
     border:1px solid #ccc;
-    width:200px;
-    padding:7px;
-    margin-left: 30px;
+    width:120px;
+    padding:5px;
+    margin-left: 20px;
     outline:none;
 }
 
@@ -196,6 +197,10 @@ html, body{
 
 .t{
     color:rgba(0,0,0,1);
+}
+
+.old{
+    background: #AAF09D!important;
 }
 
 .pages{
@@ -271,6 +276,7 @@ li.compareLi{
     margin-right: 20px;
     font-weight: 600;
     cursor:pointer;
+    font-size: 0.8rem;
     
 }
 

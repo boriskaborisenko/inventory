@@ -5,6 +5,7 @@ const user =  document.querySelector('#user')
 const pass =  document.querySelector('#pass')
 const btn =  document.querySelector('#authbtn')
 const creds = {auth:false, pass:false}
+const aigingDays = 5 
 
 const myheaders =  (pass) => {
     return {
@@ -50,6 +51,7 @@ simpleAuth()
 
 
 const filtered = {
+    invTerm:[],
     invYes:[],
     invNo:[],
     all:[],
@@ -143,10 +145,12 @@ const switchLoader = (switcher) => {
 }
 
 const template = (d) => {
+    console.log(d,'ONE CARD')
+    const old = (d.inv && d.term) ? 'old' : ''
     const classX = (d.inv) ? 'yep' : 'nope'
     const classY = (d.inv) ? '' : 't'
     const style = (d.inv) ? 'style="color:#fff;"' : ''
-    return `<div class="card  ${classX}">
+    return `<div class="card  ${classX} ${old}">
     <div class="num ${classY}">${d.id} <div class="ddate">Added: ${d.date}</div></div>
     <div class="desc"  ${style}>${trun(d.name, 80)}</div>
     <div class="date">Inventory: ${d.last}</div>
@@ -253,6 +257,7 @@ compareMenu.forEach(m=>{
             'yes': () => insertData(filtered.invYes),
             'not': () => insertData(filtered.invNo),
             'all': () => insertData(filtered.all),
+            'aiging': () => insertData(filtered.invTerm),
             'updt': () => getData()
           };
           
@@ -299,11 +304,25 @@ const getData = async () => {
         s.inv = false
         filtered.invNo.push(s)
     }
+
+    s.term = false
     
     filtered.all.push(s)
-   })
+})
 
-   //console.log(filtered)
+//////// fix terms of inv
+const terms = (days) => {
+    filtered.invYes.map(iy => {
+        const diff = (moment().diff(moment(iy.last.split(' | ')[0],'DD.MM.YYYY'),'days'))
+        if(diff >= days){
+            iy.term = true
+            filtered.invTerm.push(iy)
+        }
+    })
+}
+terms(aigingDays)
+console.log(filtered)
+
 
   ///fix menu
   //menu[1].classList.add('actv')
@@ -312,6 +331,7 @@ const getData = async () => {
   document.querySelector('#total').innerHTML = ` (${filtered.all.length})`
   document.querySelector('#innot').innerHTML = ` (${filtered.invNo.length})`
   document.querySelector('#inyes').innerHTML = ` (${filtered.invYes.length})`
+  document.querySelector('#inaiging').innerHTML = ` (${filtered.invTerm.length})`
   ///fix menu
 
    insertData(filtered.all)

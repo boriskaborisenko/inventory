@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
     <link rel="stylesheet" href="../views/all.css">
     <title>Inventory App</title>
     <link rel="icon" href="http://simpleicon.com/wp-content/uploads/rocket.svg">
@@ -30,7 +31,7 @@
             <div class="left_fix">
                 <div class="left_inner">
                     <div class="logo">
-                        <img src="../views/brcl.png" alt="">
+                        <!--<img src="../views/brcl.png" alt="">-->
                     </div>
                     <div class="left_nav">
                         <ul class="nav_ul">
@@ -56,6 +57,7 @@
                             <li class="m compareLi actv" id="all">Total<span id="total"></span></li>
                             <li class="m compareLi" id="not">Not Inventered <span id="innot"></span></li>
                             <li class="m compareLi" id="yes">Inventered <span id="inyes"></span></li>
+                            <li class="m compareLi" id="aiging">Aiging <span id="inaiging"></span></li>
                             <li class="compareLi" id="download">XLSX</li>
                             <li class="compareLi"> <input class="in" type="text" id="search"></li>
                         </ul>
