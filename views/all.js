@@ -123,6 +123,7 @@ const ExportData = (input) =>
 const clearData = () => {
     buffer.value = ''
     res.innerHTML = ''
+    filtered.invTerm = []
     filtered.invYes = []
     filtered.invNo = []
     filtered.all = []
@@ -145,7 +146,6 @@ const switchLoader = (switcher) => {
 }
 
 const template = (d) => {
-    console.log(d,'ONE CARD')
     const old = (d.inv && d.term) ? 'old' : ''
     const classX = (d.inv) ? 'yep' : 'nope'
     const classY = (d.inv) ? '' : 't'
@@ -321,7 +321,6 @@ const terms = (days) => {
     })
 }
 terms(aigingDays)
-console.log(filtered)
 
 
   ///fix menu
@@ -555,6 +554,26 @@ const mypdfAll = async  () => {
     //getData()
 
 
+
+    const helps = [
+        {
+            name:'Harper DB', 
+            url: 'https://studio.harperdb.io/o/2da4a20d/i/compute-stack-2da4a20d-1617638214557/browse/FIN/inventory'
+        },
+        {
+            name:'Merge PDF',
+            url:'https://smallpdf.com/merge-pdf'
+        },
+        {
+            name:'Zero Trust',
+            url:'https://www.cloudflare.com/ru-ru/insights-zero-trust-network-security/'
+        }
+    ]
+    const ulHelps = document.querySelector('#helper')
+
+helps.map(h=>{
+    ulHelps.innerHTML += `<li class="ohli"><a class="oha" href="${h.url}" target="_blank">${h.name}</a></li>`
+})
    
 
  

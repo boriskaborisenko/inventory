@@ -446,3 +446,18 @@ img{
     text-align: center;
     
 }
+
+
+.oh{
+    margin:0;
+    padding:0;
+}
+
+.ohli{
+    list-style: none;
+}
+
+.oha{
+    color:#7A1FA4;
+    text-decoration: none;
+}
