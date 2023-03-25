@@ -69,6 +69,7 @@ const views = document.querySelectorAll('.view')
 
 const inventory = () => {
     getData()
+    document.getElementById('b').classList.remove('noflow')
 }
 
 const No = () => {
@@ -77,10 +78,10 @@ const No = () => {
 
 const actionsNav = {
     'inventory': () => inventory(),
-    'createStickers': () => console.log('createStickers func'),
+    'createStickers': () => {document.getElementById('b').classList.add('noflow')},
     'allStickers': () => No(),
-    'onPhone' : () => No(),
-    'help' : () => No()
+    'onPhone' : () => {document.getElementById('b').classList.remove('noflow')},
+    'help' : () => {document.getElementById('b').classList.remove('noflow')}
   };
   
   
@@ -94,7 +95,7 @@ mainNav.forEach(m => {
             v.classList.add('off')
             if(v.id.split('_')[0] === m.id){
                 v.classList.remove('off')
-                console.log(v.id.split('_')[0],m.id,'look')
+                //console.log(v.id.split('_')[0],m.id,'look')
             } 
         })
         
@@ -178,7 +179,6 @@ const cp = (el) => {
     buffer.select()
     buffer.setSelectionRange(0, 99999)
     navigator.clipboard.writeText(buffer.value)
-    console.log(filtered.buffer, filtered.buffer_str)
     textarea.value = filtered.buffer_str
     
 }
@@ -449,7 +449,6 @@ let stickers = []
           all.innerHTML = ''    
           //alert('Data ready. Wait while pdfs generated')
           for (let i=0; i < ps.length; i++){ //ps.length
-             console.log(i)
                   all.innerHTML += ps[i]
                   await html2pdf().set(opt('stickersPack_'+(i+1))).from(all).save()
                   //all.innerHTML = ''  
@@ -468,13 +467,11 @@ let stickers = []
 gen.addEventListener('click', async ()=>{
     
     const dataset = createSet(textarea.value)
-    console.log(dataset)
     all.innerHTML = ''
     stickers = []
     ps = []
     const answer = (dataset.length > 0) ?  await apiPost('/dataset', dataset) : false
-    console.log(answer)
-   
+    
     if(answer)
     mypdf(answer)
 
@@ -532,7 +529,6 @@ const mypdfAll = async  () => {
         allX.innerHTML = ''    
         //alert('Data ready. Wait while pdfs generated')
         for (let i=0; i < psAll.length; i++){ //ps.length
-           console.log(i)
                 allX.innerHTML += psAll[i]
                 await html2pdf().set(opt('filename_'+(i+1))).from(allX).save()
                 allX.innerHTML = ''  
