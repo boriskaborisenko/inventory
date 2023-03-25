@@ -132,6 +132,7 @@ const clearData = () => {
     filtered.total_pages = 0
     filtered.buffer = []
     filtered.buffer_str = ''
+    inp.value = ''
     
 }
 
@@ -237,10 +238,12 @@ inp.addEventListener('keyup', () => {
     insertData(search)
     ///fix menu
 
-    if(inp.value > 0){
-        //menu.forEach(m => m.classList.remove('actv'))
+    if(inp.value.length > 0){
+        compareMenu.forEach(m => {
+            m.classList.remove('actv')
+        })
     }else{
-        //menu[1].classList.add('actv')
+        compareMenu[1].classList.add('actv')
     }
 }, false)
 
