@@ -1,17 +1,7 @@
 const code = window.location.href.split('/code/')[1]
 const codeData = {code, harp:false}
 
-// Current URL: https://my-website.com/page_a
-const nextURL = '/';
-const nextTitle = '';
-const nextState = { additionalInformation: '' };
-//window.history.pushState(nextState, nextTitle, nextURL);
 
-// This will replace the current entry in the browser's history, without reloading
-//window.history.replaceState(nextState, nextTitle, nextURL);
-
-
-//http://localhost:32765/code/U2FsdGVkX1+pVMKpby59DX46YrEqVVbbJTMrRrHupyo=
 
 /* const successCallback = (position) => {
     console.log(position.coords);
@@ -52,7 +42,7 @@ const pasteData = (d) => {
         load.style.display = 'none'
         
     }
-    
+    history.pushState({}, 'New Page', '/');
 }
 
 
