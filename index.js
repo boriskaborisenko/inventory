@@ -134,22 +134,37 @@ app.get('/code/:inv',  async (req, res) => {
 
 app.get('/getcodedata/:inv',  async (req, res) => {
 
-    const useId = {id:0}
-    const aes = req.params.inv
-    const addSlash = aes.replace(/xAzX/g,"/")
-    const bytes  = CryptoJS.AES.decrypt(addSlash, process.env.AESSECRET);
-    try {
-        useId.id = bytes.toString(CryptoJS.enc.Utf8) 
-    }catch{
-        console.log('return error')
-        return res.json({
-            error:true
-        }) 
+
+    const testUrl = req.params.inv.split('30003rQqQx')[1]
+    console.log(testUrl,'testing url')
+
+    let x = 0
+
+    if(testUrl === undefined){
+        const useId = {id:0}
+        const aes = req.params.inv
+        const addSlash = aes.replace(/xAzX/g,"/")
+        const bytes  = CryptoJS.AES.decrypt(addSlash, process.env.AESSECRET);
+        
+        try {
+            x = bytes.toString(CryptoJS.enc.Utf8) 
+        }catch{
+            console.log('return error')
+            return res.json({
+                error:true
+            }) 
+        }
+    }
+
+    if(testUrl){
+        x = testUrl.split('WezYtsoi')[0]
     }
 
     
+
     
-    const id = Number(useId.id)
+    
+    const id = Number(x)
     console.log(id,'REAL INV')
     await sql.connect(sqlConfig)
     //const all = await sql.query `select * from osk o join kdk k on o.n_kdk = k.n_kdk where o.invnumber = ${id}`
