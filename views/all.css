@@ -422,6 +422,7 @@ img{
     box-sizing: border-box;
     padding: 4px;
     text-align: center;
+    font-size: 20px;
 }
 
 .ixib{
@@ -461,3 +462,74 @@ img{
     color:#7A1FA4;
     text-decoration: none;
 }
+
+select:focus,
+    textarea:focus,
+    input,
+    input:focus {
+      font-size: 20px!important;
+    }
+
+
+
+@media screen and (max-width: 600px) {
+    .enter{
+        width:calc(100% - 20px);
+    }
+    .ixi{
+        width:100%;
+       
+    }
+    select:focus,
+    textarea:focus,
+    input,
+    input:focus {
+      font-size: 20px!important;
+    }
+    
+    .left_menu{
+        display:none;
+    }
+    .top_nav{
+        width:100%;
+        background:#fafbfc;
+        border-bottom:1px solid #eee;
+        padding:10px;
+        box-sizing: border-box;
+    }
+    .container{
+        width:100%;
+    }
+    .card{
+        width:100%;
+    }
+    .micromark{
+        display: none;
+    }
+    ul.compareUl{
+        width:100%;
+    }
+    li.compareLi{
+        display: inline;
+        margin-right: 0px;
+        width:100%;
+        box-sizing: border-box;
+    }
+    .compareLi:nth-child(5){
+        display:none;
+    }
+    .in{
+        margin-top:20px;
+        margin-left: 0px;
+        width:100%;
+        box-sizing: border-box;
+    }
+  }
+
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    select:focus,
+    textarea:focus,
+    input:focus {
+      font-size: 20px!important;
+    }
+  }

@@ -234,8 +234,9 @@ const insertData = (data) => {
     
 }
 
-inp.addEventListener('keyup', () => {
-    const search = filtered.all.filter( x => x.idStr.includes(inp.value) || x.name.toLowerCase().includes(inp.value) )
+inp.addEventListener('input', () => {
+    const s = inp.value.toLowerCase()
+    const search = filtered.all.filter( x => x.idStr.includes(s) || x.name.toLowerCase().includes(s) )
     insertData(search)
     ///fix menu
 
@@ -244,7 +245,7 @@ inp.addEventListener('keyup', () => {
             m.classList.remove('actv')
         })
     }else{
-        compareMenu[1].classList.add('actv')
+        compareMenu[0].classList.add('actv')
     }
 }, false)
 
