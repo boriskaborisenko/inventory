@@ -1,6 +1,6 @@
 const code = window.location.href.split('/code/')[1]
 const codeData = {code, harp:false}
-
+history.pushState({}, 'New Page', '/')
 
 
 /* const successCallback = (position) => {
@@ -42,7 +42,7 @@ const pasteData = (d) => {
         load.style.display = 'none'
         
     }
-    history.pushState({}, 'New Page', '/');
+   
 }
 
 
@@ -54,7 +54,6 @@ fetch("/getcodedata/"+codeData.code,
     codeData.inv = data.data
     codeData.id = data.id
     codeData.harp = data.harp
-    //console.log(codeData)
     pasteData(codeData)
 })
 
@@ -65,8 +64,7 @@ mark.addEventListener('click', async () => {
     load.style.display = 'flex'
     fetch("/mark/"+codeData.id).then(response=>response.json())
     .then(data=>{
-        console.log(data)
-        //pasteData(data)
+        //console.log(data)
         load.style.display = 'none'
         cont.style.disply = 'none'
         btn.style.display = 'none'
