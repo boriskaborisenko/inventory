@@ -125,18 +125,32 @@ app.get('/', (req,res) => {
 
 ///// mobile inventory logic start ////////
 
+
+
 app.get('/code/:inv',  async (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/code.html'));
+   res.sendFile(path.join(__dirname, 'views/code.html'));
 })
 
 
 app.get('/getcodedata/:inv',  async (req, res) => {
-    const addSlash = req.params.inv.replace(/xAzX/g,"/")
+
+    const useId = {id:0}
+    const aes = req.params.inv
+    const addSlash = aes.replace(/xAzX/g,"/")
     const bytes  = CryptoJS.AES.decrypt(addSlash, process.env.AESSECRET);
-    const originalText = bytes.toString(CryptoJS.enc.Utf8);
+    try {
+        useId.id = bytes.toString(CryptoJS.enc.Utf8) 
+    }catch{
+        console.log('return error')
+        return res.json({
+            error:true
+        }) 
+    }
+
     
     
-    const id = Number(originalText)
+    const id = Number(useId.id)
+    console.log(id,'REAL INV')
     await sql.connect(sqlConfig)
     //const all = await sql.query `select * from osk o join kdk k on o.n_kdk = k.n_kdk where o.invnumber = ${id}`
     const all = await sql.query `select * from osk o where o.invnumber = ${id}`
