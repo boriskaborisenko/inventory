@@ -117,6 +117,7 @@ app.post('/auth', (req, res) => {
 
 
 app.get('/', (req,res) => {
+    console.log('/'+moment().format('DD.MM.YYYY hh:mm:ss'))
     res.sendFile(path.join(__dirname, 'views/all.html'));
 })
 
