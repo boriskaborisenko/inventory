@@ -127,7 +127,7 @@ html, body{
 .in{
     border-radius: 0px;
     border:none;
-    border-bottom:2px solid #ccc;
+    border-bottom:1px solid rgba(0,0,0,0.2);
     width:120px;
     padding:5px;
     margin-left: 20px;
@@ -467,7 +467,6 @@ img{
 }
 
 select:focus,
-    textarea:focus,
     input,
     input:focus {
       font-size: 14px!important;
@@ -484,7 +483,6 @@ select:focus,
        
     }
     select:focus,
-    textarea:focus,
     input,
     input:focus {
       font-size: 16px!important;
@@ -526,6 +524,7 @@ select:focus,
         margin-left: 0px;
         width:100%;
         box-sizing: border-box;
+        background: transparent;
     }
   }
 

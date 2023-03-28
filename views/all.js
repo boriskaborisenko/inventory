@@ -270,7 +270,15 @@ compareMenu.forEach(m=>{
     }, false)
 })
 
-
+const counterStickers = () => {
+    const total = filtered.all.length
+    const onPage = 27
+    const setPages = 4
+    const totalSets = Math.ceil(total / (onPage * setPages))
+    const s = (totalSets == 1) ? 'file' : 'files'
+    const str = `Warning! This is a very resource-intensive task. If you have a weak computer it may take some time.<br>For <b>${total} items</b> will be generate <b>${totalSets} PDF ${s} (~2MB)</b> with ${setPages} pages inside (${onPage} items per page).<br><br>If you sure &#8594; click button below and be patient`
+    document.querySelector('#stickerCount').innerHTML = str
+}
 
 const getData = async () => {
     switchLoader(true)
@@ -313,7 +321,11 @@ const getData = async () => {
     s.term = false
     
     filtered.all.push(s)
+   
 })
+
+
+
 
 //////// fix terms of inv
 const terms = (days) => {
@@ -340,6 +352,7 @@ terms(aigingDays)
 
    insertData(filtered.all)
    switchLoader(false)
+   counterStickers()
   
 }
 
