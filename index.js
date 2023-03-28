@@ -118,7 +118,7 @@ app.post('/auth', (req, res) => {
 
 app.get('/', (req,res) => {
     console.log(req.headers.host)
-    console.log('/'+moment().format('DD.MM.YYYY hh:mm:ss'))
+    console.log('/'+moment().format('DD.MM.YYYY HH:mm:ss'))
     res.sendFile(path.join(__dirname, 'views/all.html'));
 })
 
@@ -384,7 +384,7 @@ app.get('/compareget', isAuth, async(req, res) => {
     const harpDB = await hdb.data
     
     harpDB.map(h=>{
-        const oneH = {id:h.inv, last: moment(h.last).format('DD.MM.YYYY | hh:mm')}
+        const oneH = {id:h.inv, last: moment(h.last).format('DD.MM.YYYY | HH:mm')}
         dbHarper.push(oneH)
     })
 
