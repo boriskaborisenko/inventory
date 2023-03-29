@@ -2,6 +2,7 @@ views/barcodes
 views/qr
 *.pdf
 
+url.js
 # Logs
 logs
 *.log
