@@ -183,13 +183,15 @@ const cp = (el) => {
         })
         el.classList.remove('sel')
     }
+    
+    
     filtered.buffer_str = filtered.buffer.join(',')
     buffer.value = filtered.buffer_str
     buffer.select()
     buffer.setSelectionRange(0, 99999)
     navigator.clipboard.writeText(buffer.value)
     textarea.value = filtered.buffer_str
-    
+    //marks
 }
 
 const makePages = () => {
