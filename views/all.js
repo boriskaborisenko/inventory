@@ -7,6 +7,8 @@ const btn =  document.querySelector('#authbtn')
 const creds = {auth:false, pass:false}
 const aigingDays = 5 
 
+const compareMenu = document.querySelectorAll('.m')
+
 const myheaders =  (pass) => {
     return {
     'Accept': 'application/json',
@@ -73,15 +75,22 @@ const inventory = () => {
 }
 
 const No = () => {
+    compareMenu.forEach(c=>{
+        c.classList.remove('actv')
+    })
+    compareMenu[0].classList.add('actv')
     document.querySelector('#allX').innerHTML = ''
 }
 
 const actionsNav = {
     'inventory': () => inventory(),
-    'createStickers': () => {document.getElementById('b').classList.add('noflow')},
+    'createStickers': () => {document.getElementById('b').classList.add('noflow')
+                    No()},
     'allStickers': () => No(),
-    'onPhone' : () => {document.getElementById('b').classList.remove('noflow')},
-    'help' : () => {document.getElementById('b').classList.remove('noflow')}
+    'onPhone' : () => {document.getElementById('b').classList.remove('noflow')
+                    No()},
+    'help' : () => {document.getElementById('b').classList.remove('noflow')
+                    No() }
   };
   
   
@@ -104,7 +113,7 @@ mainNav.forEach(m => {
 })
 
 ////////////////COMPARE////////////////
-const compareMenu = document.querySelectorAll('.m')
+
 const inp = document.querySelector('#search')
 const res = document.querySelector('#res')
 const buffer = document.querySelector('#buffer')
