@@ -137,13 +137,12 @@ app.get('/code/:inv',  async (req, res) => {
 app.get('/getcodedata/:inv',  async (req, res) => {
 
 
-    const testUrl = req.params.inv.split('30003rQqQx')[1]
+    const testUrl = req.params.inv.split(process.env.IVA)[1]
     console.log(testUrl,'testing url')
 
     let x = 0
 
     if(testUrl === undefined){
-        const useId = {id:0}
         const aes = req.params.inv
         const addSlash = aes.replace(/xAzX/g,"/")
         const bytes  = CryptoJS.AES.decrypt(addSlash, process.env.AESSECRET);
@@ -159,7 +158,9 @@ app.get('/getcodedata/:inv',  async (req, res) => {
     }
 
     if(testUrl){
-        x = testUrl.split('WezYtsoi')[0]
+        x = testUrl.split(process.env.IVB)[0]
+        const buff = Buffer.from(x, 'base64')
+        x = buff.toString('utf-8')
     }
 
     
