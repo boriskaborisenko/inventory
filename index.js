@@ -122,6 +122,10 @@ app.get('/', (req,res) => {
     res.sendFile(path.join(__dirname, 'views/all.html'));
 })
 
+app.get('/ok', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views/ok.html'));
+})
+
 
 
 

@@ -70,7 +70,7 @@ mark.addEventListener('click', async () => {
         btn.style.display = 'none'
         last.style.display = 'none'
         info.style.display = 'block'
-        setTimeout(()=>{location.href = 'https://page.was.deleted'  },4000)
+        setTimeout(()=>{location.href = 'https://barcodes.pp.ua/ok'  },4000)
         
     })
 
