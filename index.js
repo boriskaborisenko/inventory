@@ -180,7 +180,7 @@ app.get('/getcodedata/:inv',  async (req, res) => {
             error:true
         })
     }
-
+ 
     await sql.connect(sqlConfig)
     const FIO = await sql.query `select * from kdk where n_kdk = ${all.recordset[0].N_KDK}`
 
