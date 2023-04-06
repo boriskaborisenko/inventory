@@ -5,7 +5,8 @@ const http = require('http');
 const QRCode = require("qrcode-svg");
 const barcode = require('barcode-2-svg');
 const CryptoJS = require("crypto-js")
-const fs = require('fs')
+const fs = require('fs/promises')
+const fx = require('fs')
 const axios = require('axios')
 const moment = require('moment')
 const express = require('express')
@@ -43,7 +44,7 @@ const harpData = (data) => {
 }
 
 
-const makeQR = (url,output) => {
+const makeQR =  (url,output) => {
     const qrcode = new QRCode({
         content: url,
         padding: 4,
@@ -53,7 +54,7 @@ const makeQR = (url,output) => {
         background: "#ffffff",
         ecl: "M"
       });
-      fs.writeFileSync('views/qr/'+output+'.svg', qrcode.svg());
+      fx.writeFileSync('views/qr/'+output+'.svg', qrcode.svg());
 }
 
 const makeBarcode = (nums, output) => {
@@ -174,7 +175,6 @@ app.get('/getcodedata/:inv',  async (req, res) => {
     const id = Number(x)
     console.log(id,'REAL INV')
     await sql.connect(sqlConfig)
-    //const all = await sql.query `select * from osk o join kdk k on o.n_kdk = k.n_kdk where o.invnumber = ${id}`
     const all = await sql.query `select * from osk o where o.invnumber = ${id}`
 
 
@@ -263,7 +263,6 @@ app.get('/mark/:inv', async (req, res) => {
 
 app.get('/stickerdata/:imgs', isAuth, async (req, res) => {
     await sql.connect(sqlConfig)
-   //const  all = await sql.query `select * from osk where invnumber not like '%1116%'`
    const  all = await sql.query `select * from osk`
     console.log(all.recordset.length)
 
@@ -317,7 +316,6 @@ app.get('/stickerdata/:imgs', isAuth, async (req, res) => {
 
 app.post('/dataset', isAuth, async (req, res) => {
     
-    //const queryIds = `select * from osk o join kdk k on o.n_kdk = k.n_kdk where o.invnumber in (${req.body.join(', ')})`
     const queryIds = `select * from osk o where o.invnumber in (${req.body.join(', ')})`
     await sql.connect(sqlConfig)
     const all = await sql.query(queryIds)
@@ -359,8 +357,18 @@ app.post('/dataset', isAuth, async (req, res) => {
 
 app.get('/compareget', isAuth, async(req, res) => {
 
+    
+    
+    // READ FROM SQL
+    /*
     await sql.connect(sqlConfig)
-    const db= await sql.query `select * from osk order by DATE_D DESC`
+    const db = await sql.query `select * from osk order by DATE_D DESC`
+    */
+
+    // READ FROM SYNC FILE
+    const syncData = await fs.readFile('sync/data', { encoding: 'utf8' })
+    const db = JSON.parse(syncData)
+
 
     const dbData = []
     const dbHarper = []
