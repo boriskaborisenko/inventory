@@ -24,7 +24,7 @@ const sqlConfig = {
     }
 }
 
-
+sql.connect(sqlConfig)
 
 
 
@@ -174,7 +174,7 @@ app.get('/getcodedata/:inv',  async (req, res) => {
     
     const id = Number(x)
     console.log(id,'REAL INV')
-    await sql.connect(sqlConfig)
+    //await sql.connect(sqlConfig)
     const all = await sql.query `select * from osk o where o.invnumber = ${id}`
 
 
@@ -185,7 +185,7 @@ app.get('/getcodedata/:inv',  async (req, res) => {
         })
     }
  
-    await sql.connect(sqlConfig)
+    //await sql.connect(sqlConfig)
     const FIO = await sql.query `select * from kdk where n_kdk = ${all.recordset[0].N_KDK}`
 
     const fullName = (FIO.rowsAffected[0] == 0) ? 'No name' : FIO.recordset[0].FIO_OTV
@@ -262,7 +262,7 @@ app.get('/mark/:inv', async (req, res) => {
 }) */
 
 app.get('/stickerdata/:imgs', isAuth, async (req, res) => {
-    await sql.connect(sqlConfig)
+    //await sql.connect(sqlConfig)
    const  all = await sql.query `select * from osk`
     console.log(all.recordset.length)
 
@@ -317,7 +317,7 @@ app.get('/stickerdata/:imgs', isAuth, async (req, res) => {
 app.post('/dataset', isAuth, async (req, res) => {
     
     const queryIds = `select * from osk o where o.invnumber in (${req.body.join(', ')})`
-    await sql.connect(sqlConfig)
+    //await sql.connect(sqlConfig)
     const all = await sql.query(queryIds)
     
     const lowdata = []
