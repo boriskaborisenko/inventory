@@ -155,6 +155,7 @@ const readAll = async (from, to) => {
     
     let out = ''
     let many = false
+    let message = `Помилок в проводках немає. ${moment(from).format('DD.MM.YYYY')} – ${moment(to).format('DD.MM.YYYY')}`
     
     if(acceFilter.length > 0){
         acceFilter.map(a => {
@@ -183,25 +184,20 @@ const readAll = async (from, to) => {
             out += `Всього ${acceFilter.length} проводок з помилками. ${moment(from).format('DD.MM.YYYY')} – ${moment(to).format('DD.MM.YYYY')}`
           } 
 
-     axios.get('https://api.telegram.org/bot'+process.env.TELEGA+'/sendMessage', {
-                    params: {
-                      chat_id: process.env.CHAT_ID,
-                      text: out
-                    }
-                  })  
+     message = out
         
         
        
         //console.log(acceFilter)
         //fs.writeFileSync('sync/OUTPUT.json', JSON.stringify(acceFilter))
-    }else{
+    }
         axios.get('https://api.telegram.org/bot'+process.env.TELEGA+'/sendMessage', {
                     params: {
                       chat_id: process.env.CHAT_ID,
-                      text: `Помилок в проводках немає. ${moment(from).format('DD.MM.YYYY')} – ${moment(to).format('DD.MM.YYYY')}`
+                      text: message
                     }
                   }) 
-    }
+    
     
     
     console.log(acceFilter.length," — nums of errors. From "+moment(from).format('DD.MM.YYYY')+" to "+moment(to).format('DD.MM.YYYY'))
