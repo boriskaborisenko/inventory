@@ -158,6 +158,7 @@ const switchLoader = (switcher) => {
 }
 
 const template = (d) => {
+    const fullname = (d.fullname) ? d.fullname : '—'
     const old = (d.inv && d.term) ? 'old' : ''
     const classX = (d.inv) ? 'yep' : 'nope'
     const classY = (d.inv) ? '' : 't'
@@ -165,6 +166,7 @@ const template = (d) => {
     return `<div class="card  ${classX} ${old}">
     <div class="num ${classY}">${d.id} <div class="ddate">Added: ${d.date}</div></div>
     <div class="desc"  ${style}>${trun(d.name, 80)}</div>
+    <div class="respName">${fullname}</div>
     <div class="date">Inventory: ${d.last}</div>
     <div id="${d.id}" class="micromark"  onClick="cp(this)"></div>
     </div>`
@@ -232,7 +234,7 @@ const insertData = (data) => {
     filtered.pages = chunkedArray
     filtered.total_pages = filtered.pages.length 
 
-    console.log(filtered)
+    
    
     if(filtered.pages.length > 0){
         filtered.pages[0].map(p =>{
@@ -249,7 +251,8 @@ const insertData = (data) => {
 
 inp.addEventListener('input', () => {
     const s = inp.value.toLowerCase()
-    const search = filtered.all.filter( x => x.idStr.includes(s) || x.name.toLowerCase().includes(s) )
+    const search = filtered.all.filter( x => x.idStr.includes(s) || x.name.toLowerCase().includes(s) || x.fullname.toLowerCase().includes(s)  )
+    console.log(search)
     insertData(search)
     ///fix menu
 
@@ -261,6 +264,8 @@ inp.addEventListener('input', () => {
         compareMenu[0].classList.add('actv')
     }
 }, false)
+
+
 
 
 
@@ -301,7 +306,7 @@ const getData = async () => {
        headers:myheaders(creds.pass)
     })
     const data = await allCall.json()
-
+    //console.log(data,'ALL')
     ////filter weapons 
 
     const withoutWeapons = []
@@ -332,6 +337,13 @@ const getData = async () => {
     }
 
     s.term = false
+
+    const findKDKfull = data.kdk.find(k => k.N_KDK.trim() === s.kdk)
+    
+    s.fullname = '-'
+    if(findKDKfull){
+        s.fullname = `${findKDKfull.NAM} ${findKDKfull.FAM.toUpperCase()}`
+    }
     
     filtered.all.push(s)
    

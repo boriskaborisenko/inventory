@@ -19,17 +19,40 @@ const sqlConfig = {
 }
 
 const importData =  async () => {
-    const start = moment()
-    console.log('start import')
+    
     await sql.connect(sqlConfig)
     const db = await sql.query `select * from osk order by DATE_D DESC`
     sql.close()
     const jsonStr = JSON.stringify(db)
     fs.writeFileSync('sync/data', jsonStr)
+
     
+   
+}
+
+const importKDK =  async () => {
+    
+    await sql.connect(sqlConfig)
+    const db = await sql.query `select * from kdk`
+    sql.close()
+    const jsonStr = JSON.stringify(db)
+    fs.writeFileSync('sync/dataKDK', jsonStr)
+
+    
+   
+}
+
+const imports = async () => {
+    const start = moment()
+    console.log('start import')
+   await importKDK()
+
+    await importData()
     const diff = moment(start).diff(moment())
     console.log('Import end in: '+diff*(-1)+'ms')
 }
 
-importData()
+imports()
+
+
 

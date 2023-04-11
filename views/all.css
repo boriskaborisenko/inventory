@@ -176,12 +176,13 @@ html, body{
 
 .desc{
     margin:10px 0;
-    height:65px;
+    height:58px;
     border-top:1px solid #eee;
-    padding-top:10px;
+    padding-top:5px;
     color:rgba(0,0,0,0.83);
     font-weight: 600;
     overflow-wrap: break-word;
+    font-size: 0.9rem;
     
 }
 
@@ -190,6 +191,11 @@ html, body{
 }
 
 .date{
+    color:rgba(0,0,0, 0.4);
+    font-size: 0.7rem;
+}
+
+.respName{
     color:rgba(0,0,0, 0.4);
     font-size: 0.7rem;
 }
