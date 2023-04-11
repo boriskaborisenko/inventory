@@ -106,11 +106,16 @@ html, body{
     padding:20px 0 20px 20px;
     border-bottom:1px solid #eee;
     box-sizing: border-box;
+    position:fixed;
+    z-index:2;
+    width:100%;
+    background:#fff;
 }
 
 .main{
     box-sizing: border-box;
     padding:20px;
+    
 }
 
 .view{
@@ -275,6 +280,7 @@ html, body{
     justify-content: flex-start;
     gap:10px 10px;
     margin-bottom:20px;
+    padding-top:60px;
 }
 
 ul.compareUl{
