@@ -5,7 +5,7 @@ const user =  document.querySelector('#user')
 const pass =  document.querySelector('#pass')
 const btn =  document.querySelector('#authbtn')
 const creds = {auth:false, pass:false}
-const aigingDays = 5 
+const aigingDays = 15 
 
 const compareMenu = document.querySelectorAll('.m')
 
@@ -231,6 +231,8 @@ const insertData = (data) => {
 
     filtered.pages = chunkedArray
     filtered.total_pages = filtered.pages.length 
+
+    console.log(filtered)
    
     if(filtered.pages.length > 0){
         filtered.pages[0].map(p =>{

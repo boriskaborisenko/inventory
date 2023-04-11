@@ -4,6 +4,8 @@ const fsp = require('fs/promises')
 const fs = require('fs')
 const axios = require('axios')
 
+const cron = require('node-cron');
+
 const sql = require('mssql')
 const sqlConfig = {
     user:process.env.DBUSER,
@@ -11,13 +13,15 @@ const sqlConfig = {
     server:process.env.S,
     database:process.env.DB,
     options:{
+        encrypt: false,
         trustServerCertificate: true,
-    },
+    }
+    /*,
     pool: {
         max: 10,
         min: 0,
         idleTimeoutMillis: 30000
-    }
+    }*/
 }
 
 
@@ -26,7 +30,7 @@ const start = moment()
 const createACCE = async () => {
 
     await sql.connect(sqlConfig)
-    const data = await sql.query `select * from ACCE`
+    const data = await sql.query `select * from ACCE where DATE_D >= Convert(datetime, '2023-01-01' )`
     
     const jsonStr = JSON.stringify(data)
     fs.writeFileSync('sync/.acce', jsonStr)
@@ -50,7 +54,7 @@ const createKAUGV = async () => {
 
 const createDMZ = async () => {
     await sql.connect(sqlConfig)
-    const data = await sql.query `select * from DMZ`
+    const data = await sql.query `select * from DMZ where DATE_D >= Convert(datetime, '2023-01-01' )`
     
     const jsonStr = JSON.stringify(data)
     fs.writeFileSync('sync/.dmz', jsonStr)
@@ -226,5 +230,7 @@ const runAll = async (from, to) => {
 }
 ////////////////////////
 
-runAll('2023-01-01', moment().format('YYYY-MM-DD'))
-
+//runAll('2023-01-01', moment().format('YYYY-MM-DD'))
+  cron.schedule('30 17 * * *', () => {
+    runAll('2023-01-01', moment().format('YYYY-MM-DD'))
+  });

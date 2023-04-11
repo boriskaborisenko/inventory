@@ -20,6 +20,7 @@ const sqlConfig = {
     server:process.env.S,
     database:process.env.DB,
     options:{
+        encrypt: false,
         trustServerCertificate: true,
     }
 }

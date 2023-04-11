@@ -21,6 +21,7 @@
     "fs": "^0.0.1-security",
     "moment": "^2.29.4",
     "mssql": "^9.1.1",
+    "node-cron": "^3.0.2",
     "path": "^0.12.7",
     "qrcode": "^1.5.1",
     "qrcode-base64": "^1.0.1",
