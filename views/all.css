@@ -33,6 +33,11 @@ html, body{
     margin-bottom:20px;
 }
 
+#rc{
+    font-size: 0.7rem;
+    color:rgba(0,0,0,0.4);
+}
+
 .fullapp{
     position:relative;
     width:100%;
