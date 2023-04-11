@@ -231,6 +231,6 @@ const runAll = async (from, to) => {
 ////////////////////////
 
 //runAll('2023-01-01', moment().format('YYYY-MM-DD'))
-  cron.schedule('29 17 * * *', () => {
+  cron.schedule('29 18 * * *', () => {
     runAll('2023-01-01', moment().format('YYYY-MM-DD'))
   });
