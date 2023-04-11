@@ -1,5 +1,6 @@
 views/barcodes
 views/qr
+sync
 *.pdf
 
 url.js
