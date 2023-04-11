@@ -114,7 +114,7 @@ mainNav.forEach(m => {
 
 ////////////////COMPARE////////////////
 
-
+const rc = document.querySelector('#rc')
 const inp = document.querySelector('#search')
 const res = document.querySelector('#res')
 const buffer = document.querySelector('#buffer')
@@ -253,7 +253,11 @@ const insertData = (data) => {
 inp.addEventListener('input', () => {
     const s = inp.value.toLowerCase()
     const search = filtered.all.filter( x => x.idStr.includes(s) || x.name.toLowerCase().includes(s) || x.fullname.toLowerCase().includes(s)  )
-    console.log(search)
+    //console.log(search.length)
+    rc.innerHTML = 'found: '+search.length
+    if(inp.value.length = 0){
+        rc.innerHTML = ''
+    }
     insertData(search)
     ///fix menu
 
@@ -276,6 +280,7 @@ compareMenu.forEach(m=>{
         compareMenu.forEach(m=>m.classList.remove('actv'))
         m.classList.add('actv')
         inp.value = ''
+        rc.innerHTML = ''
 
         const actions = {
             'yes': () => insertData(filtered.invYes),
