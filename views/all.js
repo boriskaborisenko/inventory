@@ -255,7 +255,7 @@ inp.addEventListener('input', () => {
     const search = filtered.all.filter( x => x.idStr.includes(s) || x.name.toLowerCase().includes(s) || x.fullname.toLowerCase().includes(s)  )
     //console.log(search.length)
     rc.innerHTML = 'found: '+search.length
-    if(inp.value.length = 0){
+    if(inp.value.length == 0){
         rc.innerHTML = ''
     }
     insertData(search)
