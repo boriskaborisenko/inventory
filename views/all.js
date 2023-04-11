@@ -113,6 +113,7 @@ mainNav.forEach(m => {
 })
 
 ////////////////COMPARE////////////////
+//test git
 
 const inp = document.querySelector('#search')
 const res = document.querySelector('#res')
