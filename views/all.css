@@ -543,6 +543,9 @@ select:focus,
         box-sizing: border-box;
         background: transparent;
     }
+    #res{
+        margin-top:40px;
+    }
   }
 
  
