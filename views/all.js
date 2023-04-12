@@ -403,7 +403,8 @@ document.querySelector('#download').addEventListener('click',()=>{
 
     const str = []
     filtered.all.map(f=>{
-        str.push({"invNumber":f.id, "description":f.name, "LastUpdate":f.last})
+        console.log(f)
+        str.push({"Інв номер":f.id, "Опис":f.name, "МВО":f.fullname, "Підрозділ":f.podname, "Дата сканування":f.last})
     })
     
     ExportData(str)
