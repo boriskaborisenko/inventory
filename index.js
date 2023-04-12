@@ -392,6 +392,7 @@ app.get('/compareget', isAuth, async(req, res) => {
             idStr:d.INVNUMBER.trim().toString(),
             name: d.NOS,
             kdk: kdkx,
+            ceh_k: d.CEH_K,
             date: getDate
         }
         dbData.push(one)

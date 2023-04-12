@@ -343,7 +343,7 @@ const getData = async () => {
     }
 
     s.term = false
-
+    
     const findKDKfull = data.kdk.find(k => k.N_KDK.trim() === s.kdk)
     
     s.fullname = '-'
@@ -352,6 +352,7 @@ const getData = async () => {
     }
     
     filtered.all.push(s)
+
    
 })
 
