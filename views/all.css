@@ -151,7 +151,7 @@ html, body{
 
 .card{
     width:250px;
-    height: 150px;
+    height: 174px;
     background:#fff;
     box-sizing: border-box;
     padding:10px;
@@ -182,6 +182,13 @@ html, body{
     font-weight: 400;
     color:#fff;
     position: relative;
+}
+
+.podn{
+    font-size: 0.7rem;
+    height: 16px;
+    margin-top:4px;
+    color:rgba(0,0,0,0.4);
 }
 
 .desc{

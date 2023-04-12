@@ -43,12 +43,28 @@ const importKDK =  async () => {
    
 }
 
+const importPOD =  async () => {
+    
+    await sql.connect(sqlConfig)
+    const db = await sql.query `select * from pod`
+    sql.close()
+    const jsonStr = JSON.stringify(db)
+    fs.writeFileSync('sync/dataPOD', jsonStr)
+
+    
+   
+}
+
 const imports = async () => {
     const start = moment()
     console.log('start import')
-   await importKDK()
+   
+    await importKDK()
 
     await importData()
+   
+    await importPOD()
+
     const diff = moment(start).diff(moment())
     console.log('Import end in: '+diff*(-1)+'ms')
 }

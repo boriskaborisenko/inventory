@@ -166,6 +166,7 @@ const template = (d) => {
     const style = (d.inv) ? 'style="color:#fff;"' : ''
     return `<div class="card  ${classX} ${old}">
     <div class="num ${classY}">${d.id} <div class="ddate">Added: ${d.date}</div></div>
+    <div class="podn">${d.podname}</div>
     <div class="desc"  ${style}>${trun(d.name, 80)}</div>
     <div class="respName">${fullname}</div>
     <div class="date">Inventory: ${d.last}</div>
@@ -252,7 +253,7 @@ const insertData = (data) => {
 
 inp.addEventListener('input', () => {
     const s = inp.value.toLowerCase()
-    const search = filtered.all.filter( x => x.idStr.includes(s) || x.name.toLowerCase().includes(s) || x.fullname.toLowerCase().includes(s)  )
+    const search = filtered.all.filter( x => x.idStr.includes(s) || x.name.toLowerCase().includes(s) || x.fullname.toLowerCase().includes(s) ||x.podname.toLowerCase().includes(s)  )
     //console.log(search.length)
     rc.innerHTML = 'found: '+search.length
     if(inp.value.length == 0){
@@ -345,12 +346,20 @@ const getData = async () => {
     s.term = false
     
     const findKDKfull = data.kdk.find(k => k.N_KDK.trim() === s.kdk)
+    const findPOD = data.pod.find(p => p.CEH === s.kpod)
+    
     
     s.fullname = '-'
     if(findKDKfull){
         s.fullname = `${findKDKfull.NAM} ${findKDKfull.FAM.toUpperCase()}`
     }
+
+    s.podname = '-'
+    if(findPOD){
+        s.podname = `${findPOD.NAIM_P}`
+    }
     
+
     filtered.all.push(s)
 
    

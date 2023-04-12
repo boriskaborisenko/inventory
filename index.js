@@ -373,26 +373,33 @@ app.get('/compareget', isAuth, async(req, res) => {
     const syncDataKDK = await fs.readFile('sync/dataKDK', { encoding: 'utf8' })
     const dbKDK = JSON.parse(syncDataKDK)
 
+    const syncDataPOD = await fs.readFile('sync/dataPOD', { encoding: 'utf8' })
+    const dbPOD = JSON.parse(syncDataPOD)
+
 
     const dbData = []
     const dbHarper = []
 
     db.recordset.map(d=>{
-        //console.log(d,'OSK')
+        //console.log(d.KPOD,'OSK')
         let getDate = '—'
         let kdkx = false
+        
         if(d.DATE_D){
             getDate = moment(d.DATE_D).format('DD.MM.YYYY')
         }
         if(d.N_KDK){
             kdkx = d.N_KDK.trim()
         }
+
+        
+
         const one = {
             id:Number(d.INVNUMBER.trim()),
             idStr:d.INVNUMBER.trim().toString(),
             name: d.NOS,
             kdk: kdkx,
-            ceh_k: d.CEH_K,
+            kpod: d.KPOD,
             date: getDate
         }
         dbData.push(one)
@@ -415,7 +422,8 @@ app.get('/compareget', isAuth, async(req, res) => {
     res.json({
         harper:dbHarper,
         sql:dbData,
-        kdk:dbKDK.recordset
+        kdk:dbKDK.recordset,
+        pod:dbPOD.recordset,
     })
 })
 
