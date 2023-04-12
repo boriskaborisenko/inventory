@@ -329,7 +329,7 @@ const getData = async () => {
        headers:myheaders(creds.pass)
     })
     const data = await allCall.json()
-    console.log(data,'ALL')
+    //console.log(data,'ALL')
     ////filter weapons 
 
     const withoutWeapons = []
