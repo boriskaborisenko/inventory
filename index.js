@@ -373,8 +373,19 @@ app.get('/compareget', isAuth, async(req, res) => {
     const syncDataKDK = await fs.readFile('sync/dataKDK', { encoding: 'utf8' })
     const dbKDK = JSON.parse(syncDataKDK)
 
+
+    const kdkset = []
+    dbKDK.recordset.map(k=>{
+        kdkset.push({FAM:k.FAM, NAM:k.NAM, N_KDK:k.N_KDK})
+    })
+
     const syncDataPOD = await fs.readFile('sync/dataPOD', { encoding: 'utf8' })
     const dbPOD = JSON.parse(syncDataPOD)
+
+    const podset = []
+    dbPOD.recordset.map(d=>{
+        podset.push({CEH:d.CEH, NAIM_P:d.NAIM_P})
+    })
 
 
     const dbData = []
@@ -422,8 +433,11 @@ app.get('/compareget', isAuth, async(req, res) => {
     res.json({
         harper:dbHarper,
         sql:dbData,
-        kdk:dbKDK.recordset,
-        pod:dbPOD.recordset,
+        //kdk:dbKDK.recordset,
+        //pod:dbPOD.recordset,
+        kdk:kdkset,
+        pod:podset,
+        //test:'TEST'
     })
 })
 
