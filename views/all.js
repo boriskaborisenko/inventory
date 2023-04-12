@@ -1,3 +1,5 @@
+const aigingDays = 15 
+
 
 const app = document.querySelector("#app")
 const auth = document.querySelector('#auth')
@@ -5,7 +7,7 @@ const user =  document.querySelector('#user')
 const pass =  document.querySelector('#pass')
 const btn =  document.querySelector('#authbtn')
 const creds = {auth:false, pass:false}
-const aigingDays = 15 
+
 //
 
 const compareMenu = document.querySelectorAll('.m')
