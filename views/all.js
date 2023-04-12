@@ -200,6 +200,9 @@ const cp = (el) => {
     navigator.clipboard.writeText(buffer.value)
     textarea.value = filtered.buffer_str
     gen.classList.remove('hidegen')
+    if(filtered.buffer_str.length < 1){
+        gen.classList.add('hidegen')
+    }
     //marks
 }
 
