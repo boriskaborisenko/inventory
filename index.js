@@ -382,7 +382,7 @@ app.get('/compareget', isAuth, async(req, res) => {
 
     db.recordset.map(d=>{
         //console.log(d.KPOD,'OSK')
-        let getDate = '—'
+        let getDate = '...'
         let kdkx = false
         
         if(d.DATE_D){

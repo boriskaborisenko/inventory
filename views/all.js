@@ -349,12 +349,12 @@ const getData = async () => {
     const findPOD = data.pod.find(p => p.CEH === s.kpod)
     
     
-    s.fullname = '-'
+    s.fullname = '...'
     if(findKDKfull){
         s.fullname = `${findKDKfull.NAM} ${findKDKfull.FAM.toUpperCase()}`
     }
 
-    s.podname = '-'
+    s.podname = '...'
     if(findPOD){
         s.podname = `${findPOD.NAIM_P}`
     }

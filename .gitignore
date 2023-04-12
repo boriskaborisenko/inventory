@@ -1,6 +1,6 @@
 views/barcodes
 views/qr
-#sync
+sync
 *.pdf
 
 url.js
