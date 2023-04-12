@@ -404,7 +404,6 @@ document.querySelector('#download').addEventListener('click',()=>{
 
     const str = []
     filtered.all.map(f=>{
-        console.log(f)
         str.push({"Інв номер":f.id, "Опис":f.name, "МВО":f.fullname, "Підрозділ":f.podname, "Дата сканування":f.last})
     })
     
