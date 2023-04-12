@@ -73,6 +73,8 @@ const views = document.querySelectorAll('.view')
 const inventory = () => {
     getData()
     document.getElementById('b').classList.remove('noflow')
+    upld.value = ''
+    rc.innerHTML = ''
 }
 
 const No = () => {
@@ -82,6 +84,7 @@ const No = () => {
     compareMenu[0].classList.add('actv')
     document.querySelector('#allX').innerHTML = ''
     upld.value = ''
+    rc.innerHTML = ''
 }
 
 const actionsNav = {
@@ -150,6 +153,7 @@ const clearData = () => {
     textarea.value = ''
     gen.classList.add('hidegen')
     upld.value = ''
+    rc.innerHTML = ''
 }
 
 const trun = (str, length) => {
@@ -277,6 +281,7 @@ inp.addEventListener('input', () => {
         })
     }else{
         compareMenu[0].classList.add('actv')
+        rc.innerHTML = ''
     }
 }, false)
 
