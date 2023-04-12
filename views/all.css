@@ -9,6 +9,20 @@ html, body{
     color:rgba(0,0,0,0.65);
 }
 
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border-radius: 100px;
+ margin-top:10px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
 .loader{
     position:fixed;
     width:100%;
@@ -420,6 +434,11 @@ img{
     width:210mm;
     margin-bottom:30px;
     margin-top:14px;
+    
+}
+
+.hidegen{
+    visibility: hidden;
 }
 
 

@@ -81,6 +81,7 @@ const No = () => {
     })
     compareMenu[0].classList.add('actv')
     document.querySelector('#allX').innerHTML = ''
+    upld.value = ''
 }
 
 const actionsNav = {
@@ -119,6 +120,7 @@ const rc = document.querySelector('#rc')
 const inp = document.querySelector('#search')
 const res = document.querySelector('#res')
 const buffer = document.querySelector('#buffer')
+const upld = document.getElementById('upload')
 const chunkSize = 100 
 
 
@@ -128,7 +130,7 @@ const ExportData = (input) =>
        data=input
         const ws = XLSX.utils.json_to_sheet(data);
         const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "People");
+        XLSX.utils.book_append_sheet(wb, ws, "invs");
         XLSX.writeFile(wb,filename);
      }
 
@@ -146,7 +148,8 @@ const clearData = () => {
     filtered.buffer_str = ''
     inp.value = ''
     textarea.value = ''
-    
+    gen.classList.add('hidegen')
+    upld.value = ''
 }
 
 const trun = (str, length) => {
@@ -196,6 +199,7 @@ const cp = (el) => {
     buffer.setSelectionRange(0, 99999)
     navigator.clipboard.writeText(buffer.value)
     textarea.value = filtered.buffer_str
+    gen.classList.remove('hidegen')
     //marks
 }
 
@@ -227,6 +231,7 @@ const insertData = (data) => {
     filtered.buffer = []
     filtered.buffer_str = ''
     window.scrollTo(0,0)
+    gen.classList.add('hidegen')
    res.innerHTML = '' 
   
    const chunkedArray = []
@@ -404,7 +409,7 @@ document.querySelector('#download').addEventListener('click',()=>{
 
     const str = []
     filtered.all.map(f=>{
-        str.push({"Інв номер":f.id, "Опис":f.name, "МВО":f.fullname, "Підрозділ":f.podname, "Дата сканування":f.last})
+        str.push({"code":f.id, "Опис":f.name, "МВО":f.fullname, "Підрозділ":f.podname, "Дата сканування":f.last})
     })
     
     ExportData(str)
@@ -480,7 +485,7 @@ let stickers = []
               stickers.push(sticker)
           })
               
-              
+           
       
              
           
@@ -489,7 +494,7 @@ let stickers = []
               stickers.map((s, i) => {
                   str += templateSticker(s)
                       
-                  if((i+1) % 27 == 0 || (i+1) == stickers.length){
+                  if((i+1) % 108 == 0 || (i+1) == stickers.length){
                       ps.push(str)
                       str = ''
                   }
@@ -542,7 +547,7 @@ gen.addEventListener('click', async ()=>{
 const allX = document.querySelector('#allX')
 
 const psAll = []
-let stickersAll = []  
+const stickersAll = []  
 
 const mypdfAll = async  () => {
     document.getElementById('b').classList.add('noflow')
@@ -630,6 +635,57 @@ const mypdfAll = async  () => {
 helps.map(h=>{
     ulHelps.innerHTML += `<li class="ohli"><a class="oha" href="${h.url}" target="_blank">${h.name}</a></li>`
 })
+
+
+const filePicked = (oEvent) => {
+    const oFile = oEvent.target.files[0]
+    //const sFilename = oFile.name;
+    const reader = new FileReader()
+    
+    reader.onload = function(e) {
+        const data = e.target.result
+        const cfb = XLSX.read(data, {type: 'binary'})
+        //console.log(cfb,'CFB')
+        cfb.SheetNames.forEach(function(sheetName) {
+            //const sCSV = XLS.utils.make_csv(cfb.Sheets[sheetName])   
+            const oJS = XLS.utils.sheet_to_json(cfb.Sheets[sheetName]) 
+    
+            checkXLSX(oJS)
+        });
+    };
+    
+    reader.readAsBinaryString(oFile)
+}
+
+const checkXLSX = (data) => {
+    const out = []
+    if(data.length > 108){
+        alert('Too long file. Chunk data to 108 items')
+    }else{
+        data.map(d=>{
+            out.push(Number(d.code))
+        })
+
+        const go = out.sort((a, b) => {
+            return a - b;
+          })
+
+        textarea.value = go.join(', ')
+        gen.classList.remove('hidegen')
+    }
+}
+
+textarea.addEventListener('input' ,() =>{
+    if(textarea.value.length < 1){
+        gen.classList.add('hidegen')
+    }else{
+        gen.classList.remove('hidegen') 
+    }
+    
+}, false)
+  
+
+upld.addEventListener('change', filePicked, false);
    
 
  

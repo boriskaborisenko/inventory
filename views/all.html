@@ -83,10 +83,16 @@
                         <div style="font-size: 0.8rem;">
                             Max 108 invnumbers
                         </div>
+                        <form enctype="multipart/form-data">
+                            <label class="custom-file-upload">
+                                Додати з Excel файлу
+                            <input id="upload" type=file   accept=".xlsx" name="files[]" size=30>
+                            </label>
+                        </form>
                         <div>
-                            <button id="gen">Generate</button>
+                            <button id="gen" class="hidegen">Generate</button>
                         </div>
-                        <div class="xx">
+                        <div class="xx" style="visibility:hidden">
                             <div class="pdf"></div>
                         </div>
                     </div>
