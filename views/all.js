@@ -268,13 +268,20 @@ const insertData = (data) => {
 
 inp.addEventListener('input', () => {
     const s = inp.value.toLowerCase()
-    const search = filtered.all.filter( x => x.idStr.includes(s) || x.name.toLowerCase().includes(s) || x.fullname.toLowerCase().includes(s) ||x.podname.toLowerCase().includes(s)  )
-    //console.log(search.length)
-    rc.innerHTML = 'found: '+search.length
-    if(inp.value.length == 0){
-        rc.innerHTML = ''
+    if(s.length >= 3){
+        const search = filtered.all.filter( x => x.idStr.includes(s) || x.name.toLowerCase().includes(s) || x.fullname.toLowerCase().includes(s) ||x.podname.toLowerCase().includes(s)  )
+        //console.log(search.length)
+        rc.innerHTML = 'found: '+search.length
+        if(inp.value.length == 0){
+            rc.innerHTML = ''
+        }
+        insertData(search)
     }
-    insertData(search)
+
+    if(s.length < 3){
+        insertData(filtered.all)
+    }
+    
     ///fix menu
 
     if(inp.value.length > 0){
