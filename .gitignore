@@ -3,7 +3,7 @@ views/qr
 sync
 *.pdf
 
-#moErrorV2.js
+moErrorV2.js
 
 url.js
 # Logs
