@@ -92,6 +92,7 @@ const No = () => {
 const actionsNav = {
     'inventory': () => inventory(),
     'createStickers': () => {document.getElementById('b').classList.add('noflow')
+    window.scrollTo( 0, 0 )
                     No()},
     'allStickers': () => No(),
     'onPhone' : () => {document.getElementById('b').classList.remove('noflow')
@@ -320,11 +321,11 @@ compareMenu.forEach(m=>{
 
 const counterStickers = () => {
     const total = filtered.all.length
-    const onPage = 27
+    const onPage = 30
     const setPages = 4
     const totalSets = Math.ceil(total / (onPage * setPages))
     const s = (totalSets == 1) ? 'file' : 'files'
-    const str = `Warning! This is a very resource-intensive task. If you have a weak computer it may take some time.<br>For <b>${total} items</b> will be generate <b>${totalSets} PDF ${s} (~2MB)</b> with ${setPages} pages inside (${onPage} items per page).<br><br>If you sure &#8594; click button below and be patient`
+    const str = `Warning! This is a very resource-intensive task. If you have a weak computer it may take some time.<br>For <b>${total} items</b> will be generate <b>${totalSets} PDF</b> ${s} (~5.5MB) with ${setPages} pages inside (<b>${onPage}</b> items per page).<br><br>If you sure &#8594; click button below and be patient`
     document.querySelector('#stickerCount').innerHTML = str
 }
 
@@ -486,11 +487,28 @@ const apiPost = async (endpoint,dataset) => {
           </div>`
   }
 
+
+
+
+///////////PDF GENS
+
+
 let ps = []
 
 let stickers = []
 
+const genLoader = document.querySelector('#genLoader')
+
+const genAnime = (btn, loader) => {
+    gen.style.visibility = btn
+    genLoader.innerHTML = loader
+}
+
  const mypdf = async  (answer) => {
+
+    //console.log('Generates PDF start')
+
+    genAnime('hidden','Wait for PDF...')
      
           answer.data.map(d=>{
               const sticker = {
@@ -511,7 +529,7 @@ let stickers = []
               stickers.map((s, i) => {
                   str += templateSticker(s)
                       
-                  if((i+1) % 108 == 0 || (i+1) == stickers.length){
+                  if((i+1) % 120 == 0 || (i+1) == stickers.length){
                       ps.push(str)
                       str = ''
                   }
@@ -529,14 +547,17 @@ let stickers = []
           for (let i=0; i < ps.length; i++){ //ps.length
                   all.innerHTML += ps[i]
                   await html2pdf().set(opt('stickersPack_'+(i+1))).from(all).save()
-                  //all.innerHTML = ''  
+                  all.innerHTML = '' 
+                  genAnime('hidden','Download PDF #'+(i+1)+' from '+ps.length)
+                  //console.log('Wait for file download') 
           }
           
       }
       
-      loop()     
+      await loop()     
       
-      
+      //console.log('END')
+      genAnime('visible','')
              
       
       }
@@ -548,10 +569,18 @@ gen.addEventListener('click', async ()=>{
     all.innerHTML = ''
     stickers = []
     ps = []
+
+    if(dataset.length > 0){
+        genAnime('hidden','Getting data for PDF. Wait...')
+    }
+    
+
     const answer = (dataset.length > 0) ?  await apiPost('/dataset', dataset) : false
     
-    if(answer)
-    mypdf(answer)
+    if(answer){
+        mypdf(answer)
+    }
+   
 
 
     
@@ -628,7 +657,7 @@ const mypdfAll = async  () => {
     }, false)
 
 
-
+///////////////////////////////////////////////////////
     //getData()
 
 
@@ -676,7 +705,7 @@ const filePicked = (oEvent) => {
 
 const checkXLSX = (data) => {
     const out = []
-    if(data.length > 108){
+    if(data.length > 1080000){
         alert('Too long file. Chunk data to 108 items')
     }else{
         data.map(d=>{

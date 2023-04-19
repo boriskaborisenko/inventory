@@ -335,20 +335,53 @@ li.compareLi{
 
 
 .one{
-    width:65mm;
-    height: 30mm;
-    border:1px dotted #ddd;
-    border-radius: 10px;
+    width:68mm;
+    height: 29.43mm;
+    border-right:1px dotted #ddd;
+    border-bottom:1px dotted #ddd;
+    border-radius: 0px;
     box-sizing: border-box;
     padding: 3mm;
-    margin-right: 3mm;
+    margin-right: 0mm;
     font-size: 0;
     display:inline-block;
     vertical-align:top;
-    margin-bottom:2.8mm;
+    margin-bottom:0mm;
     position:relative;
     color:#000;
 }
+
+.one:nth-child(3n){
+    border-right: none;
+}
+
+
+
+.one:nth-child(28), .one:nth-child(29), .one:nth-child(30),
+.one:nth-child(58), .one:nth-child(59), .one:nth-child(60),
+.one:nth-child(88), .one:nth-child(89), .one:nth-child(90),
+.one:nth-child(118), .one:nth-child(119), .one:nth-child(120){
+    border-bottom:none;
+} 
+
+
+.one:nth-child(31), .one:nth-child(32), .one:nth-child(33){
+    /*background:navy;*/
+} 
+
+
+.one:nth-child(61), .one:nth-child(62), .one:nth-child(63){
+    /*background:green;*/
+    margin-top:0.5mm;
+} 
+
+.one:nth-child(91), .one:nth-child(92), .one:nth-child(93){
+    /*background:orange;*/
+    margin-top:1.5mm;
+} 
+
+
+
 
 .l{
     width:100%;
@@ -364,9 +397,9 @@ li.compareLi{
 
 .r{
     position:absolute;
-    width:21mm;
-    bottom:5px;
-    right:3px;
+    width:20.35mm;
+    bottom:2px;
+    right:4px;
     z-index:2;
 }
 
@@ -385,6 +418,7 @@ img{
 .anno{
     font-size: 7pt;
     height:20px;
+    margin-bottom:7px;
 }
 
 .svgx{
@@ -435,6 +469,11 @@ img{
     margin-bottom:30px;
     margin-top:14px;
     
+}
+
+#genLoader{
+    color:#2369F6;
+    font-size: 1rem;
 }
 
 .hidegen{

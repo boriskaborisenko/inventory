@@ -316,10 +316,12 @@ app.get('/stickerdata/:imgs', isAuth, async (req, res) => {
 }) */
 
 app.post('/dataset', isAuth, async (req, res) => {
-    
+    console.log('dataset!')
     const queryIds = `select * from osk o where o.invnumber in (${req.body.join(', ')})`
     //await sql.connect(sqlConfig)
     const all = await sql.query(queryIds)
+
+    console.log(all)
     
     const lowdata = []
     all.recordset.map((a) => {
