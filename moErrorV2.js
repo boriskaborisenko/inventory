@@ -299,7 +299,7 @@ const runAll = async (from, to) => {
 ////////////////////////
 
 //runAll('2023-01-01', moment().format('YYYY-MM-DD'))
-cron.schedule('45 18 * * *', () => {
+cron.schedule('20 18 * * *', () => {
     if(moment().format('dddd') !== 'Sunday'){
         runAll('2023-01-01', moment().format('YYYY-MM-DD'))
       }
