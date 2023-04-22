@@ -2,6 +2,7 @@ views/barcodes
 views/qr
 sync
 *.pdf
+sql notes
 
 moErrorV2.js
 
